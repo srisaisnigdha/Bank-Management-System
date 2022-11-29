@@ -53,19 +53,22 @@ class LoanAccount
     }
     double getInterestRate()
     {
+        double i;
         if (type == "GoldLoan")
         {
-            return 0.07; // rate=7%
+            i=0.07; // rate=7%
         }
         else if (type == "PropertyLoan")
         {
-            return 0.097; // rete=9.7%
+            i=0.097; // rete=9.7%
         }
+        else{i=0.01;}
+        return i;
     }
 
 public:
-    void CreateNewLoan();
-    double generateEMI(double principle);
+    void CreateNewLoan();//done
+    double generateEMI();//done
     void findDueDate();
     void getLoanType();
     void getTotalLoanAmt();
@@ -281,7 +284,7 @@ void DepositAccount::getAccountType()
         cout << "The account with given account number does not exist " << endl;
     }
 }
-double LoanAccount::generateEMI(double principle)
+double LoanAccount::generateEMI()
 {
     double emi_amt, i;
     i = getInterestRate();
@@ -313,7 +316,7 @@ void LoanAccount::CreateNewLoan()
     int period=1;
     cout<<"Principle:";
     cin>>principle;
-    emi=generateEMI(principle);
+    emi=generateEMI();
     //due_date=findDueDate();
     query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,EMI,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?,?,?,?,?);";
     result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
