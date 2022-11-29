@@ -1,7 +1,11 @@
-#include<iostream>
-#include<math.h>
+#include<bits/stdc++.h>
 #include "sqlite3.h"
-
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+#include <cstdlib>
 using namespace std;
 void connection();
 
@@ -45,29 +49,11 @@ public:
 
 class LoanAccount
 {
+    string holder_name;
     double loan_amount;
     double loan_paid;
-    string type;
+    LoanType type;
     int account_no;
-    int period;
-    void generateLoanAccountNumber(){
-        
-    }
-    double getInterestRate(){
-        if (type=="GoldLoan"){
-            return 0.07;// rate=7%
-        }
-        else if(type=="PropertyLoan"){
-            return 0.097;//rete=9.7%
-        }
-    }
-    void generateEMI(int principle){
-        double emi_amt,i;
-        i=getInterestRate();
-        i = i / (12 * 100); // one month interest
-    period = period * 12; // one month period
-    emi_amt = (principle * i * pow(1 + i, period)) / (pow(1 + i, period) - 1);
-    }
 public:
     void CreateNewLoan();
     void getLoanType();
@@ -87,7 +73,6 @@ public:
     void searchFromCIF();
     void searchDepositAccount();
     void searchLoanAccount();
-    void getLoansByType();
     void loanAccountsDue();
 };
 
@@ -96,7 +81,9 @@ int main()
     connection();
     DepositAccount a;
     //a.createAccount();
-    a.depositMoney();
+    //a.depositMoney();
+    //a.debitMoney();
+    a.getAccountType();
     //int acc = 4000;
     //a.getAmount(acc);
 
@@ -197,15 +184,20 @@ void DepositAccount::debitMoney()
     cin>>account_number;
     getchar();
 
-    cout<<"Enter the amount to be debit : \n";
-    cin>>depo_amt;
+    cout<<"Enter the amount to be debited : \n";
+    cin>>debit_amt;
 
      double pre_bal = getAmount(account_number);
-
+     if(pre_bal < debit_amt)
+     {
+           cout<<"The balance in your account is less than the amount you need to debit !!"<<endl;
+     }
+      else
+    {
     query="UPDATE DEPOSITACC SET BALANCE = ? WHERE ACCNO = ?;";
     result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
 
-    sqlite3_bind_double(stmt,1,(depo_amt+pre_bal));
+    sqlite3_bind_double(stmt,1,(pre_bal-debit_amt));
     sqlite3_bind_int(stmt, 2, account_number);
 
     sqlite3_step(stmt);
@@ -217,9 +209,10 @@ void DepositAccount::debitMoney()
         }
         else
         {
-            cout<<"Amount deposited Successfully."<<endl;
+            cout<<"Amount debited Successfully."<<endl;
             getAmount(account_number);
         }
+    }
 }
 
 double DepositAccount::getAmount(int account_no) //ask the account number in main before calling the get amount function.
@@ -242,6 +235,37 @@ double DepositAccount::getAmount(int account_no) //ask the account number in mai
             		cout<<"The balance in your account is: "<<r<<endl;
             		return r;
             }
+              cout<<"The account with given account number does not exist "<<endl;
         }
         return 0;
+}
+void DepositAccount::getAccountType()
+{
+      cout<<"Enter the account number to get the given account type : ";
+      cin>>account_number;
+      getchar();
+
+      query="SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
+
+	result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+	sqlite3_bind_int(stmt, 1, account_number);
+
+
+        if(result != SQLITE_OK)
+        {
+            cout<<"ERROR: "<<sqlite3_errmsg(db)<<endl;
+        }
+        else
+        {
+              while(sqlite3_step(stmt)==SQLITE_ROW)
+            {
+            		cout<<"your account type is: "<<sqlite3_column_text(stmt,1)<<endl;
+            		return;
+            }
+             cout<<"The account with given account number does not exist "<<endl;
+        }
+}
+void Bank::newCustomer()
+{
+
 }
