@@ -86,7 +86,7 @@ int main()
     a.getAccountType();
     //int acc = 4000;
     //a.getAmount(acc);
-
+ 
     sqlite3_close(db);
     return 0;
 }
@@ -150,15 +150,15 @@ void DepositAccount::depositMoney()
     cout<<"\n Type account no. to deposit money: \n";
     cin>>account_number;
     getchar();
-
+     
     cout<<"Enter the amount to be deposited: \n";
     cin>>depo_amt;
-
+     
      double pre_bal = getAmount(account_number);
 
     query="UPDATE DEPOSITACC SET BALANCE = ? WHERE ACCNO = ?;";
     result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-
+ 
     sqlite3_bind_double(stmt,1,(depo_amt+pre_bal));
     sqlite3_bind_int(stmt, 2, account_number);
 
@@ -183,10 +183,10 @@ void DepositAccount::debitMoney()
     cout<<"\n Type account no. to debit money: \n";
     cin>>account_number;
     getchar();
-
+     
     cout<<"Enter the amount to be debited : \n";
     cin>>debit_amt;
-
+     
      double pre_bal = getAmount(account_number);
      if(pre_bal < debit_amt)
      {
@@ -196,7 +196,7 @@ void DepositAccount::debitMoney()
     {
     query="UPDATE DEPOSITACC SET BALANCE = ? WHERE ACCNO = ?;";
     result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-
+ 
     sqlite3_bind_double(stmt,1,(pre_bal-debit_amt));
     sqlite3_bind_int(stmt, 2, account_number);
 
@@ -212,28 +212,15 @@ void DepositAccount::debitMoney()
             cout<<"Amount debited Successfully."<<endl;
             getAmount(account_number);
         }
-        else
-        {
-              while(sqlite3_step(stmt)==SQLITE_ROW)
-            {
-                          double r = sqlite3_column_double(stmt,3);
-            		cout<<"The balance in your account is: "<<r<<endl;
-            		return r;
-            }
-              cout<<"The account with given account number does not exist "<<endl;
-        }
-        return 0;
+    }
 }
-void DepositAccount::getAccountType()
+
+double DepositAccount::getAmount(int account_no) //ask the account number in main before calling the get amount function.
 {
-      cout<<"Enter the account number to get the given account type : ";
-      cin>>account_number;
-      getchar();
+query="SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
 
-      query="SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
-
-	result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-	sqlite3_bind_int(stmt, 1, account_number);
+result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+sqlite3_bind_int(stmt, 1, account_no);
 
 
         if(result != SQLITE_OK)
@@ -244,13 +231,41 @@ void DepositAccount::getAccountType()
         {
               while(sqlite3_step(stmt)==SQLITE_ROW)
             {
-            		cout<<"your account type is: "<<sqlite3_column_text(stmt,1)<<endl;
-            		return;
+                          double r = sqlite3_column_double(stmt,3);
+            cout<<"The balance in your account is: "<<r<<endl;
+            return r;
             }
-             cout<<"The account with given account number does not exist "<<endl;
+              cout<<"The account with given account number does not exist "<<endl;          
+        }
+        return 0;
+}
+void DepositAccount::getAccountType()
+{
+      cout<<"Enter the account number to get the given account type : ";
+      cin>>account_number;
+      getchar();
+     
+      query="SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
+
+result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+sqlite3_bind_int(stmt, 1, account_number);
+
+
+        if(result != SQLITE_OK)
+        {
+            cout<<"ERROR: "<<sqlite3_errmsg(db)<<endl;
+        }
+        else
+        {
+              while(sqlite3_step(stmt)==SQLITE_ROW)
+            {
+            cout<<"your account type is: "<<sqlite3_column_text(stmt,1)<<endl;
+            return;
+            }
+             cout<<"The account with given account number does not exist "<<endl;          
         }
 }
 void Bank::newCustomer()
 {
-
+   
 }
