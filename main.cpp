@@ -70,10 +70,10 @@ public:
     void CreateNewLoan();//done
     double generateEMI();//done
     void findDueDate();
-    void getLoanType();
-    void getTotalLoanAmt();
+    void getLoanType();//done
+    void getEMI();//done
+    void getTotalLoanAmt();//done
     void getLoanPaid();
-    void getLoanOwed();
 };
 
 class Bank
@@ -106,8 +106,8 @@ int main()
     a.getAccountType();
     // int acc = 4000;
     // a.getAmount(acc);
-    LoanAccount b;
-    b.CreateNewLoan();
+    LoanAccount c;
+    c.CreateNewLoan();
     sqlite3_close(db);
     return 0;
 }
@@ -341,8 +341,82 @@ void LoanAccount::CreateNewLoan()
         cout << "Data Inserted Successfully." << endl;
     }
 }
+void LoanAccount::getLoanType()
+{
+    cout << "Enter the account number to get the given account type : ";
+    cin >> account_number;
+    getchar();
 
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
 
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            cout << "your account type is: " << sqlite3_column_text(stmt, 1) << endl;
+            return;
+        }
+        cout << "The account with given account number does not exist " << endl;
+    }
+}
+void LoanAccount::getEMI(){
+    double depo_amt;
+    cout << "\n Type account to get total loan amount: \n";
+    cin >> account_number;
+    getchar();
+
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            cout << "your total loan amount is: " << sqlite3_column_double(stmt, 4)<< endl;
+            return;
+        }
+        cout << "The account with given account number does not exist " << endl;
+    }
+}
+void LoanAccount::getTotalLoanAmt()
+{
+       double depo_amt;
+    cout << "\n Type account to get total loan amount: \n";
+    cin >> account_number;
+    getchar();
+
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            cout << "your total loan amount is: " << (period*12)*(sqlite3_column_double(stmt, 4) )<< endl;
+            return;
+        }
+        cout << "The account with given account number does not exist " << endl;
+    }
+}
 
 void Bank::newCustomer()
 {
