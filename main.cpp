@@ -338,6 +338,25 @@ void LoanAccount::CreateNewLoan()
 void Bank::newCustomer()
 {
   CIF = generateCIF();
+  query = "INSERT INTO  CUSTOMERLIST(CIF,NAME,FATHERNAME,MOBILNO,ADDRESS) VALUES(?,?,?,?,?);";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, CIF);
+    sqlite3_bind_text(stmt, 2, name.c_str(), name.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 3, father_name.c_str(), father_name.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 4, mobile_no);
+    sqlite3_bind_text(stmt, 5, address.c_str(), address.length(), SQLITE_TRANSIENT);
+
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "Error: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        cout << "Data Inserted Successfully." << endl;
+    }
 }
 void Bank::searchAboutCIF()
 {
