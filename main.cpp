@@ -76,6 +76,8 @@ public:
 
 class Bank
 {
+  string name,father_name,address;
+  long long int mobile_no;
   int generateCIF()
   {
         srand((unsigned) time(NULL));
@@ -336,4 +338,29 @@ void LoanAccount::CreateNewLoan()
 void Bank::newCustomer()
 {
   CIF = generateCIF();
+}
+void Bank::searchAboutCIF()
+{
+  cout << "Enter the CIF number to search details of that CIF number : ";
+  cin >> CIF;
+  getchar();
+
+  query = "SELECT * FROM CUSTOMERLIST WHERE CIF = ?;";
+
+  result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+  sqlite3_bind_int(stmt, 1, CIF);
+
+  if (result != SQLITE_OK)
+  {
+      cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+  }
+  else
+  {
+      while (sqlite3_step(stmt) == SQLITE_ROW)
+      {
+          cout << "your account type is: " << sqlite3_column_text(stmt, 1) << endl;
+          return;
+      }
+      cout << "The account with given account number does not exist " << endl;
+  }
 }
