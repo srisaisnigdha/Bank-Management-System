@@ -317,13 +317,16 @@ void LoanAccount::CreateNewLoan()
     }
     date=__DATE__;
     string s="-";
-    query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?);";
+    int period=1;
+    query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?,?,?,?);";
     result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, account_number);
     sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
     sqlite3_bind_int(stmt, 3, CIF);
     sqlite3_bind_text(stmt, 4, date.c_str(), date.length(), SQLITE_TRANSIENT);
-    sqlite3_bind_text(stmt, 5, s.c_str(), s.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 5, period);
+    sqlite3_bind_text(stmt, 6, date.c_str(), date.length(), SQLITE_TRANSIENT);//shouldnt be initial date
+    sqlite3_bind_text(stmt, 7, s.c_str(), s.length(), SQLITE_TRANSIENT);
 
     sqlite3_step(stmt);
     sqlite3_finalize(stmt);
