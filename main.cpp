@@ -102,7 +102,10 @@ int main()
     DepositAccount a;
     Bank b;
     //b.newCustomer();
-    b.searchAboutCIF();
+    //b.searchAboutCIF();
+    //b.depositAccounts();
+    //b.loanAccounts();
+    //b.searchFromCIF();
     // a.createAccount();
     // a.depositMoney();
     // a.debitMoney();
@@ -534,9 +537,43 @@ void Bank::searchFromCIF()
 }
 void Bank::depositAccounts()
 {
+  query = "SELECT * FROM DEPOSITACC;";
+  result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
 
+  if (result != SQLITE_OK)
+  {
+      cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+  }
+  else
+  {
+      cout<<"All the deposit accounts are : "<<endl;
+      while (sqlite3_step(stmt) == SQLITE_ROW)
+      {
+          cout << "Account number is: " << sqlite3_column_int(stmt, 0) << " & ";
+          cout << "Account type is: " << sqlite3_column_text(stmt, 1) << " & ";
+          cout << "Account holder CIF no is : " << sqlite3_column_int(stmt, 2) << " & ";
+          cout << "Account balance is: " << sqlite3_column_double(stmt, 3) << endl;
+      }
+  }
 }
 void Bank::loanAccounts()
 {
+  query = "SELECT * FROM LOANACC;";
+  result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
 
+  if (result != SQLITE_OK)
+  {
+      cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+  }
+  else
+  {
+      cout<<"All the loan accounts are : "<<endl;
+      while (sqlite3_step(stmt) == SQLITE_ROW)
+      {
+          cout << "Account number is: " << sqlite3_column_int(stmt, 0) << " & ";
+          cout << "Account type is: " << sqlite3_column_text(stmt, 1) << " & ";
+          cout << "Account holder CIF no is : " << sqlite3_column_int(stmt, 2) <<" & ";
+          cout << "EMI is: " << sqlite3_column_double(stmt, 4) << endl;
+      }
+  }
 }
