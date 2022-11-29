@@ -101,19 +101,19 @@ int main()
     connection();
     DepositAccount a;
     Bank b;
-    b.newCustomer();
-    //b.searchAboutCIF();
+    //b.newCustomer();
+    b.searchAboutCIF();
     // a.createAccount();
     // a.depositMoney();
     // a.debitMoney();
     //a.getAccountType();
     // int acc = 4000;
     // a.getAmount(acc);
-    LoanAccount c;
+    //LoanAccount c;
     //c.CreateNewLoan();
-    c.getLoanType();
-    c.getEMI();
-    c.getTotalLoanAmt();
+    //c.getLoanType();
+    //c.getEMI();
+    //c.getTotalLoanAmt();
     sqlite3_close(db);
     return 0;
 }
@@ -440,12 +440,12 @@ void Bank::newCustomer()
 
   cout<<"Enter the holder's address :";
   getline(cin,address);
-  query = "INSERT INTO  CUSTOMERLIST(CIF,NAME,FATHERNAME,MOBILNO,ADDRESS) VALUES(?,?,?,?,?);";
+  query = "INSERT INTO  CUSTOMERLIST(CIF,NAME,FATHERNAME,MOBILENO,ADDRESS) VALUES(?,?,?,?,?);";
     result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, CIF);
     sqlite3_bind_text(stmt, 2, name.c_str(), name.length(), SQLITE_TRANSIENT);
     sqlite3_bind_text(stmt, 3, father_name.c_str(), father_name.length(), SQLITE_TRANSIENT);
-    sqlite3_bind_int(stmt, 4, mobile_no);
+    sqlite3_bind_int64(stmt, 4, mobile_no);
     sqlite3_bind_text(stmt, 5, address.c_str(), address.length(), SQLITE_TRANSIENT);
 
     sqlite3_step(stmt);
@@ -481,7 +481,7 @@ void Bank::searchAboutCIF()
       {
           cout << "Account holder name is: " << sqlite3_column_text(stmt, 1) << endl;
           cout << "Account holder father name is: " << sqlite3_column_text(stmt, 2) << endl;
-          cout << "Account holder mobile number is: " << sqlite3_column_int(stmt, 3) << endl;
+          cout << "Account holder mobile number is: " << sqlite3_column_int64(stmt, 3) << endl;
           cout << "Account holder address is: " << sqlite3_column_text(stmt, 4) << endl;
           return;
       }
@@ -509,7 +509,7 @@ void Bank::searchFromCIF()
       {
           cout << "Account holder name is: " << sqlite3_column_text(stmt, 1) << endl;
           cout << "Account holder father name is: " << sqlite3_column_text(stmt, 2) << endl;
-          cout << "Account holder mobile number is: " << sqlite3_column_int(stmt, 3) << endl;
+          cout << "Account holder mobile number is: " << sqlite3_column_int64(stmt, 3) << endl;
           cout << "Account holder address is: " << sqlite3_column_text(stmt, 4) << endl;
           return;
       }
