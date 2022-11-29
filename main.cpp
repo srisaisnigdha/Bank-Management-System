@@ -32,12 +32,17 @@ class Printer
 
 class DepositAccount
 {
-    int account_number;
     int CIF;
     double amount;
     string type;
-    int generateAccountNumber(); // RANDOM
+    int generateAccountNumber()
+    {
+      srand((unsigned) time(NULL));
+      account_number = 10000 + (rand() % 90000);
+      return account_number;
+    }
 public:
+    int account_number;
     void createAccount();
     void depositMoney(); //.UPDATE
     void debitMoney();   //.UPDATE
@@ -88,7 +93,6 @@ class Bank
         CIF = 100 + (rand() % 900);
         return CIF;
   }
-
 public:
     int CIF;
     void newCustomer(); // GENERATE CIF()
@@ -139,7 +143,7 @@ void DepositAccount::createAccount()
     char x;
     cout << "CIF Number:";
     cin >> CIF;
-    account_number = 13400;
+    account_number = generateAccountNumber();
     cout << "\nSavings Account / Current Account :(S/C) ";
     cin >> x;
     if (x == 'S')
