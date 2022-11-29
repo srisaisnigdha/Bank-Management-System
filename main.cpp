@@ -5,18 +5,6 @@
 using namespace std;
 void connection();
 
-enum AccountType
-{
-    savings_account,
-    current_account
-};
-enum LoanType
-{
-    gold_loan,
-    car_loan,
-    house_loan,
-    education_loan
-};
 sqlite3 *db;
 sqlite3_stmt *stmt;
 int result;
@@ -45,10 +33,11 @@ public:
 
 class LoanAccount
 {
+    int CIF;
     double loan_amount;
     double loan_paid;
     string type;
-    int account_no;
+    int account_number;
     int period;
     void generateLoanAccountNumber(){
         
@@ -244,4 +233,39 @@ double DepositAccount::getAmount(int account_no) //ask the account number in mai
             }
         }
         return 0;
+}
+
+void LoanAccount::CreateNewLoan()
+{
+    char x;
+     cout << "CIF Number:";
+        cin >> CIF;
+        account_number = 13400;
+        cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
+        cin >> x;
+        if (x == 'G')
+        {
+            type = "GoldLoan";
+        }
+        else
+        {
+            type = "PropertyLoan";
+        }
+        /*query = "INSERT INTO  DEPOSITACC(ACCNO, TYPE, CIF, BALANCE) VALUES(?,?,?,0);";
+        result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+        sqlite3_bind_int(stmt, 1, account_number);
+        sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
+        sqlite3_bind_int(stmt,3,CIF);
+
+
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+
+        if(result != SQLITE_OK){
+            cout<<"Error: "<<sqlite3_errmsg(db)<<endl;
+        }
+        else
+        {
+            cout<<"Data Inserted Successfully."<<endl;
+        }*/
 }
