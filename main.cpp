@@ -82,15 +82,16 @@ public:
 
 class Bank
 {
-    /*int generateCIF()
-    {//random
-    }*/
-
 public:
+    int generateCIF()
+    {
+        
+    }
     void newCustomer(); // GENERATE CIF()
-    void searchFromCIF();
-    void searchDepositAccount();
-    void searchLoanAccount();
+    void searchAboutCIF();
+    void searchFromCIF();   // acc num,acc type where cif=?
+    void depositAccounts(); // acc num,acc tyPE,cif
+    void loanAccounts();    // acc num, acc type,cif
     void loanAccountsDue();
 };
 
@@ -305,7 +306,7 @@ void LoanAccount::CreateNewLoan()
     {
         type = "PropertyLoan";
     }
-    date=__DATE__;
+    date = __DATE__;
     query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?);";
     result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, account_number);
