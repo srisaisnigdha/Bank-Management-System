@@ -91,8 +91,8 @@ public:
     void newCustomer(); // GENERATE CIF()
     void searchAboutCIF();
     void searchFromCIF();   // acc num,acc type where cif=?
-    void depositAccounts(); // acc num,acc tyPE,cif
-    void loanAccounts();    // acc num, acc type,cif
+    void depositAccounts(); // acc num,acc tyPE,cif,balance
+    void loanAccounts();    // acc num, acc type,cif,emi
     void loanAccountsDue();
 };
 
