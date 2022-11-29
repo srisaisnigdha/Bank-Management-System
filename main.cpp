@@ -44,8 +44,7 @@ class LoanAccount
 {
     int CIF;
     string date,duedate;
-    double loan_amount;
-    double loan_paid;
+    double emi,principle;
     string type;
     int account_number;
     int period;
@@ -66,7 +65,7 @@ class LoanAccount
 
 public:
     void CreateNewLoan();
-    void generateEMI(int principle);
+    double generateEMI(double principle);
     void findDueDate();
     void getLoanType();
     void getTotalLoanAmt();
@@ -282,7 +281,7 @@ void DepositAccount::getAccountType()
         cout << "The account with given account number does not exist " << endl;
     }
 }
-void LoanAccount::generateEMI(int principle)
+double LoanAccount::generateEMI(double principle)
 {
     double emi_amt, i;
     i = getInterestRate();
@@ -298,7 +297,7 @@ void LoanAccount::CreateNewLoan()
     char x;
     cout << "CIF Number:";
     cin >> CIF;
-    account_number = 13400;
+    account_number = 12200;
     cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
     cin >> x;
     if (x == 'G')
@@ -312,16 +311,20 @@ void LoanAccount::CreateNewLoan()
     date=__DATE__;
     string s="-";
     int period=1;
+    cout<<"Principle:";
+    cin>>principle;
+    emi=generateEMI(principle);
     //due_date=findDueDate();
-    query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?,?,?,?);";
+    query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,EMI,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?,?,?,?,?);";
     result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, account_number);
     sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
     sqlite3_bind_int(stmt, 3, CIF);
     sqlite3_bind_text(stmt, 4, date.c_str(), date.length(), SQLITE_TRANSIENT);
-    sqlite3_bind_int(stmt, 5, period);
-    sqlite3_bind_text(stmt, 6, date.c_str(), date.length(), SQLITE_TRANSIENT);//shouldnt be initial date
-    sqlite3_bind_text(stmt, 7, s.c_str(), s.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_double(stmt,5,emi);
+    sqlite3_bind_int(stmt, 6, period);
+    sqlite3_bind_text(stmt, 7, date.c_str(), date.length(), SQLITE_TRANSIENT);//shouldnt be initial date
+    sqlite3_bind_text(stmt, 8, s.c_str(), s.length(), SQLITE_TRANSIENT);
 
     sqlite3_step(stmt);
     sqlite3_finalize(stmt);
@@ -335,6 +338,9 @@ void LoanAccount::CreateNewLoan()
         cout << "Data Inserted Successfully." << endl;
     }
 }
+
+
+
 void Bank::newCustomer()
 {
   CIF = generateCIF();
