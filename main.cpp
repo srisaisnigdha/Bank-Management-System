@@ -44,10 +44,10 @@ class LoanAccount
 {
     int CIF;
     string date,duedate;
-    double emi,principle;
+    double emi=1.00,principle;
     string type;
     int account_number;
-    int period;
+    int period=1;
     void generateLoanAccountNumber()
     {
     }
@@ -103,7 +103,7 @@ int main()
     // a.createAccount();
     // a.depositMoney();
     // a.debitMoney();
-    a.getAccountType();
+    //a.getAccountType();
     // int acc = 4000;
     // a.getAmount(acc);
     LoanAccount c;
@@ -291,6 +291,7 @@ double LoanAccount::generateEMI()
     i = i / (12 * 100);   // one month interest
     period = period * 12; // one month period
     emi_amt = (principle * i * pow(1 + i, period)) / (pow(1 + i, period) - 1);
+    return emi_amt;
 }
 void LoanAccount::findDueDate(){
 
@@ -300,7 +301,7 @@ void LoanAccount::CreateNewLoan()
     char x;
     cout << "CIF Number:";
     cin >> CIF;
-    account_number = 12200;
+    account_number = 14400;
     cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
     cin >> x;
     if (x == 'G')

@@ -1,7 +1,10 @@
 # depslib dependency file v1.0
-1669663443 source:c:\users\sri sai snigdha\desktop\bank1\main.cpp
-	<iostream>
+1669743110 source:c:\users\sri sai snigdha\desktop\bank1\main.cpp
+	<bits/stdc++.h>
 	"sqlite3.h"
+	<Windows.h>
+	<unistd.h>
+	<cstdlib>
 
 1669651552 c:\users\sri sai snigdha\desktop\bank1\sqlite3.h
 	<stdarg.h>
