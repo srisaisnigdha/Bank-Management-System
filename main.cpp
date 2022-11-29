@@ -198,7 +198,7 @@ void DepositAccount::debitMoney()
     getchar();
 
     cout<<"Enter the amount to be debit : \n";
-    cin>>depo_amt;
+    //cin>>depo_amt;
 
      double pre_bal = getAmount(account_number);
 
