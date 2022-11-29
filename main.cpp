@@ -490,11 +490,11 @@ void Bank::searchAboutCIF()
 }
 void Bank::searchFromCIF()
 {
-    cout << "Enter the CIF number to search details of that CIF number : ";
+    cout << "Enter the CIF number to get the available accounts of that CIF number : ";
     cin >> CIF;
     getchar();
 
-  query = "SELECT * FROM CUSTOMERLIST WHERE CIF = ?;";
+  query = "SELECT * FROM DEPOSITACC WHERE CIF = ?;";
 
   result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
   sqlite3_bind_int(stmt, 1, CIF);
@@ -505,15 +505,31 @@ void Bank::searchFromCIF()
   }
   else
   {
+      //cout<<"The deposit accounts on this CIF number are : "<<endl;
       while (sqlite3_step(stmt) == SQLITE_ROW)
       {
-          cout << "Account holder name is: " << sqlite3_column_text(stmt, 1) << endl;
-          cout << "Account holder father name is: " << sqlite3_column_text(stmt, 2) << endl;
-          cout << "Account holder mobile number is: " << sqlite3_column_int64(stmt, 3) << endl;
-          cout << "Account holder address is: " << sqlite3_column_text(stmt, 4) << endl;
-          return;
+          cout << "Account number is: " << sqlite3_column_int(stmt, 0) << " & ";
+          cout << "Account type is: " << sqlite3_column_text(stmt, 1) << endl;
       }
-      cout << "The holder with given CIF number does not exist " << endl;
+  }
+
+  query = "SELECT * FROM LOANACC WHERE CIF = ?;";
+
+  result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+  sqlite3_bind_int(stmt, 1, CIF);
+
+  if (result != SQLITE_OK)
+  {
+      cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+  }
+  else
+  {
+      //cout<<"The loan accounts on this CIF number are : "<<endl;
+      while (sqlite3_step(stmt) == SQLITE_ROW)
+      {
+          cout << "Account number is : " << sqlite3_column_int(stmt, 0) << " & ";
+          cout << "Account type is : " << sqlite3_column_text(stmt, 1) << endl;
+      }
   }
 }
 void Bank::depositAccounts()
