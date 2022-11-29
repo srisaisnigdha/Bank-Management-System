@@ -44,11 +44,16 @@ public:
 
 class LoanAccount
 {
-    string holder_name;
     double loan_amount;
     double loan_paid;
     LoanType type;
     int account_no;
+    void generateLoanAccountNumber(){
+        
+    }
+    void generateEMI(){
+
+    }
 public:
     void CreateNewLoan();
     void getLoanType();
