@@ -82,11 +82,15 @@ public:
 
 class Bank
 {
-    /*int generateCIF()
-    {//random
-    }*/
+  int generateCIF()
+  {
+        srand((unsigned) time(NULL));
+        CIF = 100 + (rand() % 900);
+        return CIF;
+  }
 
 public:
+    int CIF;
     void newCustomer(); // GENERATE CIF()
     void searchFromCIF();
     void searchDepositAccount();
@@ -330,4 +334,5 @@ void LoanAccount::CreateNewLoan()
 }
 void Bank::newCustomer()
 {
+  CIF = generateCIF();
 }
