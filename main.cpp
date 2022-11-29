@@ -107,7 +107,10 @@ int main()
     // int acc = 4000;
     // a.getAmount(acc);
     LoanAccount c;
-    c.CreateNewLoan();
+    //c.CreateNewLoan();
+    c.getLoanType();
+    c.getEMI();
+    c.getTotalLoanAmt();
     sqlite3_close(db);
     return 0;
 }
