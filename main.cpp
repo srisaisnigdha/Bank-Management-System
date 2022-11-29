@@ -34,6 +34,7 @@ public:
 class LoanAccount
 {
     int CIF;
+    int date;
     double loan_amount;
     double loan_paid;
     string type;
@@ -255,7 +256,7 @@ void LoanAccount::CreateNewLoan()
     {
         type = "PropertyLoan";
     }
-    query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?);";
+    query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?);";
     result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, account_number);
     sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
