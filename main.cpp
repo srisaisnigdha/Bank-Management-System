@@ -49,18 +49,36 @@ public:
 
 class LoanAccount
 {
-    string holder_name;
+    int CIF;
+    int date;
     double loan_amount;
     double loan_paid;
-    LoanType type;
-    int account_no;
+    string type;
+    int account_number;
+    int period;
+    void generateLoanAccountNumber()
+    {
+    }
+    double getInterestRate()
+    {
+        if (type == "GoldLoan")
+        {
+            return 0.07; // rate=7%
+        }
+        else if (type == "PropertyLoan")
+        {
+            return 0.097; // rete=9.7%
+        }
+    }
 public:
     void CreateNewLoan();
+    void generateEMI(int principle);
     void getLoanType();
     void getTotalLoanAmt();
     void getLoanPaid();
     void getLoanOwed();
 };
+
 
 class Bank
 {
@@ -264,6 +282,50 @@ sqlite3_bind_int(stmt, 1, account_number);
             }
              cout<<"The account with given account number does not exist "<<endl;          
         }
+}
+    void LoanAccount::generateEMI(int principle)
+    {
+        double emi_amt, i;
+        i = getInterestRate();
+        i = i / (12 * 100);   // one month interest
+        period = period * 12; // one month period
+        emi_amt = (principle * i * pow(1 + i, period)) / (pow(1 + i, period) - 1);
+    }
+void LoanAccount::CreateNewLoan()
+{
+    char x;
+    cout << "CIF Number:";
+    cin >> CIF;
+    account_number = 13400;
+    cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
+    cin >> x;
+    if (x == 'G')
+    {
+        type = "GoldLoan";
+    }
+    else
+    {
+        type = "PropertyLoan";
+    }
+    query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?);";
+    result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+    sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt,3,CIF);
+    sqlite3_bind_int(stmt,4,d);
+    sqlite3_bind_text(stmt, 5, type.c_str(), type.length(), SQLITE_TRANSIENT);
+
+
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+
+    if(result != SQLITE_OK){
+        cout<<"Error: "<<sqlite3_errmsg(db)<<endl;
+    }
+    else
+    {
+        cout<<"Data Inserted Successfully."<<endl;
+    }
 }
 void Bank::newCustomer()
 {
