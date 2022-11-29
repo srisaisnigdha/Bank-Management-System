@@ -255,20 +255,14 @@ void LoanAccount::CreateNewLoan()
     {
         type = "PropertyLoan";
     }
-<<<<<<< HEAD
     /*query = "INSERT INTO  DEPOSITACC(ACCNO, TYPE, CIF, BALANCE) VALUES(?,?,?,0);";
-=======
     query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?);";
->>>>>>> b9e739aee2d62618de12eb2dd279533b3a5d7256
     result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, account_number);
     sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
     sqlite3_bind_int(stmt,3,CIF);
-<<<<<<< HEAD
-=======
     sqlite3_bind_int(stmt,4,d);
     sqlite3_bind_text(stmt, 5, type.c_str(), type.length(), SQLITE_TRANSIENT);
->>>>>>> b9e739aee2d62618de12eb2dd279533b3a5d7256
 
 
     sqlite3_step(stmt);
@@ -281,7 +275,6 @@ void LoanAccount::CreateNewLoan()
     {
         cout<<"Data Inserted Successfully."<<endl;
     }*/
-<<<<<<< HEAD
 }
 
 void Bank::newCustomer()
@@ -303,6 +296,4 @@ void Bank::newCustomer()
     {
         cout<<"Data Inserted Successfully."<<endl;
     }
-=======
->>>>>>> b9e739aee2d62618de12eb2dd279533b3a5d7256
 }
