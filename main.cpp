@@ -92,9 +92,10 @@ class Bank
 public:
     int CIF;
     void newCustomer(); // GENERATE CIF()
-    void searchFromCIF();
-    void searchDepositAccount();
-    void searchLoanAccount();
+    void searchAboutCIF();
+    void searchFromCIF();   // acc num,acc type where cif=?
+    void depositAccounts(); // acc num,acc tyPE,cif
+    void loanAccounts();    // acc num, acc type,cif
     void loanAccountsDue();
 };
 
