@@ -9,18 +9,6 @@
 using namespace std;
 void connection();
 
-enum AccountType
-{
-    savings_account,
-    current_account
-};
-enum LoanType
-{
-    gold_loan,
-    car_loan,
-    house_loan,
-    education_loan
-};
 sqlite3 *db;
 sqlite3_stmt *stmt;
 int result;
@@ -55,7 +43,7 @@ public:
 class LoanAccount
 {
     int CIF;
-    string date;
+    string date,duedate;
     double loan_amount;
     double loan_paid;
     string type;
@@ -79,6 +67,7 @@ class LoanAccount
 public:
     void CreateNewLoan();
     void generateEMI(int principle);
+    void findDueDate();
     void getLoanType();
     void getTotalLoanAmt();
     void getLoanPaid();
@@ -299,6 +288,9 @@ void LoanAccount::generateEMI(int principle)
     period = period * 12; // one month period
     emi_amt = (principle * i * pow(1 + i, period)) / (pow(1 + i, period) - 1);
 }
+void LoanAccount::findDueDate(){
+
+}
 void LoanAccount::CreateNewLoan()
 {
     char x;
@@ -318,6 +310,7 @@ void LoanAccount::CreateNewLoan()
     date=__DATE__;
     string s="-";
     int period=1;
+    //due_date=findDueDate();
     query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?,?,?,?);";
     result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, account_number);
