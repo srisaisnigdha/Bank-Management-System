@@ -100,6 +100,9 @@ int main()
 {
     connection();
     DepositAccount a;
+    Bank b;
+    b.newCustomer();
+    //b.searchAboutCIF();
     // a.createAccount();
     // a.depositMoney();
     // a.debitMoney();
@@ -425,6 +428,18 @@ void LoanAccount::getTotalLoanAmt()
 void Bank::newCustomer()
 {
   CIF = generateCIF();
+  cout<<"Enter the holder's name :";
+  getline(cin,name);
+
+  cout<<"Enter the holder father's name :";
+  getline(cin,father_name);
+
+  cout<<"Enter the holder's mobile number :";
+  cin>>mobile_no;
+  getchar();
+
+  cout<<"Enter the holder's address :";
+  getline(cin,address);
   query = "INSERT INTO  CUSTOMERLIST(CIF,NAME,FATHERNAME,MOBILNO,ADDRESS) VALUES(?,?,?,?,?);";
     result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, CIF);
@@ -464,9 +479,48 @@ void Bank::searchAboutCIF()
   {
       while (sqlite3_step(stmt) == SQLITE_ROW)
       {
-          cout << "your account type is: " << sqlite3_column_text(stmt, 1) << endl;
+          cout << "Account holder name is: " << sqlite3_column_text(stmt, 1) << endl;
+          cout << "Account holder father name is: " << sqlite3_column_text(stmt, 2) << endl;
+          cout << "Account holder mobile number is: " << sqlite3_column_int(stmt, 3) << endl;
+          cout << "Account holder address is: " << sqlite3_column_text(stmt, 4) << endl;
           return;
       }
-      cout << "The account with given account number does not exist " << endl;
+      cout << "The holder with given CIF number does not exist " << endl;
   }
+}
+void Bank::searchFromCIF()
+{
+    cout << "Enter the CIF number to search details of that CIF number : ";
+    cin >> CIF;
+    getchar();
+
+  query = "SELECT * FROM CUSTOMERLIST WHERE CIF = ?;";
+
+  result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+  sqlite3_bind_int(stmt, 1, CIF);
+
+  if (result != SQLITE_OK)
+  {
+      cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+  }
+  else
+  {
+      while (sqlite3_step(stmt) == SQLITE_ROW)
+      {
+          cout << "Account holder name is: " << sqlite3_column_text(stmt, 1) << endl;
+          cout << "Account holder father name is: " << sqlite3_column_text(stmt, 2) << endl;
+          cout << "Account holder mobile number is: " << sqlite3_column_int(stmt, 3) << endl;
+          cout << "Account holder address is: " << sqlite3_column_text(stmt, 4) << endl;
+          return;
+      }
+      cout << "The holder with given CIF number does not exist " << endl;
+  }
+}
+void Bank::depositAccounts()
+{
+
+}
+void Bank::loanAccounts()
+{
+
 }
