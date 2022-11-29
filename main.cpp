@@ -34,9 +34,9 @@ public:
     void createAccount();
     void depositMoney(); //.UPDATE
     void debitMoney();   //.UPDATE
-    void showTransactions();
+    void showTransactions();  //*
     double getAmount(int); //.SELECT
-    void getHolderName();
+    void getHolderName();  //*
     void getAccountType(); //.SELECT
 };
 
@@ -93,7 +93,7 @@ public:
     void searchFromCIF();   // acc num,acc type where cif=?
     void depositAccounts(); // acc num,acc tyPE,cif,balance
     void loanAccounts();    // acc num, acc type,cif,emi
-    void loanAccountsDue();
+    void loanAccountsDue(); //*
 };
 
 int main()
@@ -103,15 +103,17 @@ int main()
     Bank b;
     //b.newCustomer();
     //b.searchAboutCIF();
+    //b.searchFromCIF();
     //b.depositAccounts();
     //b.loanAccounts();
-    //b.searchFromCIF();
+
     // a.createAccount();
     // a.depositMoney();
     // a.debitMoney();
     //a.getAccountType();
     // int acc = 4000;
     // a.getAmount(acc);
+
     //LoanAccount c;
     //c.CreateNewLoan();
     //c.getLoanType();
