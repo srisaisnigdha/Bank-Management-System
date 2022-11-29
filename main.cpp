@@ -1,4 +1,5 @@
 #include<iostream>
+#include<math.h>
 #include "sqlite3.h"
 
 using namespace std;
@@ -44,11 +45,29 @@ public:
 
 class LoanAccount
 {
-    string holder_name;
     double loan_amount;
     double loan_paid;
-    LoanType type;
+    string type;
     int account_no;
+    int period;
+    void generateLoanAccountNumber(){
+        
+    }
+    double getInterestRate(){
+        if (type=="GoldLoan"){
+            return 0.07;// rate=7%
+        }
+        else if(type=="PropertyLoan"){
+            return 0.097;//rete=9.7%
+        }
+    }
+    void generateEMI(int principle){
+        double emi_amt,i;
+        i=getInterestRate();
+        i = i / (12 * 100); // one month interest
+    period = period * 12; // one month period
+    emi_amt = (principle * i * pow(1 + i, period)) / (pow(1 + i, period) - 1);
+    }
 public:
     void CreateNewLoan();
     void getLoanType();
@@ -68,6 +87,7 @@ public:
     void searchFromCIF();
     void searchDepositAccount();
     void searchLoanAccount();
+    void getLoansByType();
     void loanAccountsDue();
 };
 
