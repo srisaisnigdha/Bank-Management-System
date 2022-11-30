@@ -49,8 +49,11 @@ class LoanAccount
     string type;
     int account_number;
     int period = 1;
-    void generateLoanAccountNumber()
+    int generateLoanAccountNumber()
     {
+        srand((unsigned)time(NULL));
+        account_number = 10000 + (rand() % 90000);
+        return account_number;
     }
     double getInterestRate()
     {
@@ -105,15 +108,19 @@ public:
 int main()
 {
     connection();
-    DepositAccount a;
-    Bank b;
+    //DepositAccount a;
+    //Bank b;
+    //LoanAccount c; 
+
     //b.newCustomer();
+
+    // a.createAccount();
+     //c.CreateNewLoan();
     //b.searchAboutCIF();
     //b.searchFromCIF();
     //b.depositAccounts();
     //b.loanAccounts();
 
-    // a.createAccount();
     // a.depositMoney();
     // a.debitMoney();
     // a.getAccountType();
@@ -360,7 +367,7 @@ void LoanAccount::CreateNewLoan()
     char x;
     cout << "CIF Number:";
     cin >> CIF;
-    account_number = 54362;
+    account_number = generateLoanAccountNumber() ;
     cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
     cin >> x;
     if (x == 'G')
