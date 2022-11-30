@@ -49,8 +49,11 @@ class LoanAccount
     string type;
     int account_number;
     int period = 1;
-    void generateLoanAccountNumber()
+    int generateLoanAccountNumber()
     {
+        srand((unsigned)time(NULL));
+        account_number = 10000 + (rand() % 90000);
+        return account_number;
     }
     double getInterestRate()
     {
@@ -358,7 +361,7 @@ void LoanAccount::CreateNewLoan()
     char x;
     cout << "CIF Number:";
     cin >> CIF;
-    account_number = 14400;
+    account_number = generateLoanAccountNumber() ;
     cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
     cin >> x;
     if (x == 'G')
