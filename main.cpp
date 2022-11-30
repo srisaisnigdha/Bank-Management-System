@@ -108,26 +108,29 @@ public:
 int main()
 {
     connection();
-    DepositAccount a;
-    Bank b;
+    //DepositAccount a;
+    //Bank b;
+    //LoanAccount c; 
+
     //b.newCustomer();
+
+    // a.createAccount();
+     //c.CreateNewLoan();
     //b.searchAboutCIF();
     //b.searchFromCIF();
     //b.depositAccounts();
     //b.loanAccounts();
 
-    // a.createAccount();
     // a.depositMoney();
     // a.debitMoney();
     // a.getAccountType();
     // int acc = 4000;
     // a.getAmount(acc);
 
-    //LoanAccount c;
-    //c.CreateNewLoan();
     //c.getLoanType();
     //c.getEMI();
     //c.getTotalLoanAmt();
+
     sqlite3_close(db);
     return 0;
 }
