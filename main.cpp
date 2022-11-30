@@ -120,11 +120,12 @@ int main()
     // int acc = 4000;
     // a.getAmount(acc);
 
-    //LoanAccount c;
+    LoanAccount c;
     //c.CreateNewLoan();
     //c.getLoanType();
     //c.getEMI();
     //c.getTotalLoanAmt();
+    c.payMonthlyEMI();
     sqlite3_close(db);
     return 0;
 }
@@ -327,10 +328,11 @@ string LoanAccount::getDueDate(int account_no)
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             d= string( reinterpret_cast< const char* >(sqlite3_column_text(stmt, 6)));
-            return d;
+            cout<<d;
+            return findDueDate(d);
         }
     }
-    return;
+    return "";
 
 }
 string LoanAccount::findDueDate(string d)
@@ -358,7 +360,7 @@ void LoanAccount::CreateNewLoan()
     char x;
     cout << "CIF Number:";
     cin >> CIF;
-    account_number = 14400;
+    account_number = 54362;
     cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
     cin >> x;
     if (x == 'G')
