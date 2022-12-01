@@ -84,7 +84,7 @@ class LoanAccount
     }
 
 public:
-    void CreateNewLoan();              // done
+    void createNewLoan();              // done
     double generateEMI();              // done
     string getDueDate(int account_no); // done
     string findDueDate(string a);      // done
@@ -118,29 +118,224 @@ public:
 
 int main()
 {
-    header();
     connection1();
-    // DepositAccount a;
-    Bank b;
-    // LoanAccount c;
+    DepositAccount obj_a;
+    connection2();
+    Bank obj_b;
+    connection3();
+    LoanAccount obj_c;
+    while(1)
+    {
+    int menu;
+    cout << "-------------------------------------------------------------------------------------------------" << endl;
+    cout<<"Press [1] to enter into deposits section \n";
+    cout<<"Press [2] to enter into loans section \n";
+    cout<<"Press [3] to get accounts of given CIF \n";
+    cout<<"Press [4] to get given CIF details \n";
+    cout<<"Press [5] to get deposit list \n";
+    cout<<"Press [6] to get loans list \n";
+    cout<<"Press [7] to get customer list \n";
+    cout<<"Press [8] to exit from bank \n";
+    cout << "-------------------------------------------------------------------------------------------------" << endl;
+    cin>>menu;
+    getchar();
 
+    switch(menu)
+    {
+          case 1:
+          {
+               while(1)
+               {
+                char choice1;
+              cout << "-------------------------------------------------------------------------------------------------" << endl;
+    cout<<"Press [a] to create account \n";
+    cout<<"Press [b] to deposit money \n";
+    cout<<"Press [c] to debit money \n";
+    cout<<"Press [d] to get account type \n";
+    cout<<"Press [e] to fetch balance \n";
+    cout<<"Press [f] to exit from deposits section \n";
+    cout << "-------------------------------------------------------------------------------------------------" << endl;
+    cin>>choice1;
+    getchar();
+
+    switch(choice1)
+    {
+          case a:
+          {
+              obj_a.createAccount();
+                break;
+          }
+          case b:
+          {
+                obj_a.depositMoney();
+                break;
+          }
+          case c:
+          {
+                obj_a.debitMoney();
+                break;
+          }
+          case d:
+          {
+                obj_a.getAccountType();
+                break;
+          }
+          case e:
+          {
+                    int acc;
+                 cout<<"Enter the account number : ";
+                 cin>>acc;
+               obj_a.getAmount(acc);
+                break;
+          }
+          case f:
+          {
+                cout<<"Successfully exited from deposits section."<<endl;
+                exit(1);
+                break;
+          }
+         default:
+          {
+                cout<<"!!Please press the valid key!!"<<endl;
+                break;
+          }
+    }
+            }
+                break;
+          }
+          case 2:
+          {
+                while(1)
+                {
+
+               char choice2;
+              cout << "-------------------------------------------------------------------------------------------------" << endl;
+    cout<<"Press [a] to create new loan \n";
+    cout<<"Press [b] to generate EMI \n";
+    cout<<"Press [c] to get due date \n";
+    cout<<"Press [d] to pay monthly EMI \n";
+    cout<<"Press [e] to get loan type \n";
+    cout<<"Press [f] to get EMI \n";
+     cout<<"Press [g] to get total loan amount \n";
+      cout<<"Press [h] to exit from loans section \n";
+    cout << "-------------------------------------------------------------------------------------------------" << endl;
+    cin>>choice2;
+    getchar();
+
+    switch(choice2)
+    {
+          case a:
+          {
+              obj_c.createNewLoan();
+                break;
+          }
+          case b:
+          {
+                obj_c.generateEMI();
+                break;
+          }
+          case c:
+          {
+                  int acc;
+                  cout<<"Enter the account number : ";
+                  cin>>acc;
+                obj_c.getDueDate(acc);
+                break;
+          }
+          case d:
+          {
+                obj_c.payMonthlyEMI();
+                break;
+          }
+          case e:
+          {
+                    obj_c.getLoanType();
+                break;
+          }
+          case f:
+          {
+                obj_c.getEMI();
+                break;
+          }
+          case g:
+          {
+                obj_c.getTotalLoanAmt();
+                break;
+          }
+          case h:
+          {
+                cout<<"Successfully exited from loans section."<<endl;
+                exit(1);
+                break;
+          }
+         default:
+          {
+                cout<<"!!Please press the valid key!!"<<endl;
+                break;
+          }
+    }
+               }
+                break;
+          }
+          case 3:
+          {
+                obj_b.searchFromCIF();
+                break;
+          }
+          case 4:
+          {
+               obj_b.searchAboutCIF();
+                break;
+          }
+          case 5:
+          {
+                obj_b.depositAccounts();
+                break;
+          }
+          case 6:
+          {
+               obj_b.loanAccounts();
+                break;
+          }
+          case 7:
+          {
+              obj_b.customerList();
+                break;
+          }
+          case 8:
+          {
+                cout<<"Successfully exited from bank."<<endl;
+                exit(1);
+                break;
+          }
+          default:
+          {
+                cout<<"!!Please press the valid key!!"<<endl;
+                break;
+          }
+        }
+    }
+    //header();
+    //connection1();
+    //DepositAccount a;
+    //connection2();
+    //Bank b;
+    //connection3();
+    //LoanAccount c;
     // b.newCustomer();
-
     // a.createAccount();
-    // c.CreateNewLoan();
+    // c.createNewLoan();
     // b.searchAboutCIF();
     // b.searchFromCIF();
     // b.depositAccounts();
-    b.loanAccounts();
-
+    //b.loanAccounts();
     // a.depositMoney();
     // a.debitMoney();
     // a.getAccountType();
     // int acc = 4000;
     // a.getAmount(acc);
-
     // LoanAccount c;
-    // c.CreateNewLoan();
+    // c.createNewLoan();
     // c.getLoanType();
     // c.getEMI();
     // c.getTotalLoanAmt();
@@ -423,7 +618,7 @@ string LoanAccount::findDueDate(string d)
     }
     return due;
 }
-void LoanAccount::CreateNewLoan()
+void LoanAccount::createNewLoan()
 {
     char x;
     cout << "CIF Number:";
