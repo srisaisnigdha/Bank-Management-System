@@ -9,6 +9,12 @@
 using namespace std;
 void connection();
 
+void header()
+{
+  cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;            cout<<"\t\t\t\t\t<><><><><><><><><><><><>< SMS BANK ><><><><><><><><><><><><><>\t\t\t\t\t"<<endl;
+  cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
+}
+
 sqlite3 *db;
 sqlite3_stmt *stmt;
 int result;
@@ -107,10 +113,11 @@ public:
 
 int main()
 {
-    connection();
+    //header();
+    //connection();
     //DepositAccount a;
     //Bank b;
-    //LoanAccount c; 
+    //LoanAccount c;
 
     //b.newCustomer();
 
@@ -127,13 +134,13 @@ int main()
     // int acc = 4000;
     // a.getAmount(acc);
 
-    LoanAccount c;
+    //LoanAccount c;
     //c.CreateNewLoan();
     //c.getLoanType();
     //c.getEMI();
     //c.getTotalLoanAmt();
-    c.payMonthlyEMI();
-    sqlite3_close(db);
+    //c.payMonthlyEMI();
+    //sqlite3_close(db);
     return 0;
 }
 
@@ -610,11 +617,15 @@ void Bank::searchFromCIF()
     else
     {
         // cout<<"The loan accounts on this CIF number are : "<<endl;
+        cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
+        cout<<left<<setw(25) << "Account number" << setw(25) << "Account type "<<endl;
+        cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
-            cout << "Account number is : " << sqlite3_column_int(stmt, 0) << " & ";
-            cout << "Account type is : " << sqlite3_column_text(stmt, 1) << endl;
+            cout <<left<<setw(25) << sqlite3_column_int(stmt, 0)
+                             <<setw(25) << sqlite3_column_text(stmt, 1) << endl;
         }
+        cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
     }
 }
 void Bank::depositAccounts()
@@ -629,13 +640,20 @@ void Bank::depositAccounts()
   else
   {
       cout<<"All the deposit accounts are : "<<endl;
-      while (sqlite3_step(stmt) == SQLITE_ROW)
+      cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
+      cout<<left<<setw(25) <<"Account number"
+                       <<setw(25) <<"Account type"
+                       << setw(25) <<"CIF"
+                       << setw(25) <<"BALANCE "<<endl;
+      cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
+       while (sqlite3_step(stmt) == SQLITE_ROW)
       {
-          cout << "Account number is: " << sqlite3_column_int(stmt, 0) << " & ";
-          cout << "Account type is: " << sqlite3_column_text(stmt, 1) << " & ";
-          cout << "Account holder CIF no is : " << sqlite3_column_int(stmt, 2) << " & ";
-          cout << "Account balance is: " << sqlite3_column_double(stmt, 3) << endl;
+          cout <<left<<setw(25)<< sqlite3_column_int(stmt, 0)
+                            <<setw(25)<< sqlite3_column_text(stmt, 1)
+                            <<setw(25)<< sqlite3_column_int(stmt, 2)
+                            <<setw(25)<< sqlite3_column_double(stmt, 3) << endl;
       }
+      cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
   }
 }
 void Bank::loanAccounts()
@@ -650,12 +668,19 @@ void Bank::loanAccounts()
   else
   {
       cout<<"All the loan accounts are : "<<endl;
+      cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
+      cout<<left<<setw(25) <<"Account number"
+                       <<setw(25) <<"Account type"
+                       << setw(25) <<"CIF"
+                       << setw(25) <<"EMI"<<endl;
+      cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
       while (sqlite3_step(stmt) == SQLITE_ROW)
       {
-          cout << "Account number is: " << sqlite3_column_int(stmt, 0) << " & ";
-          cout << "Account type is: " << sqlite3_column_text(stmt, 1) << " & ";
-          cout << "Account holder CIF no is : " << sqlite3_column_int(stmt, 2) <<" & ";
-          cout << "EMI is: " << sqlite3_column_double(stmt, 4) << endl;
+           cout <<left<<setw(25)<< sqlite3_column_int(stmt, 0)
+                            <<setw(25)<< sqlite3_column_text(stmt, 1)
+                            <<setw(25)<< sqlite3_column_int(stmt, 2)
+                            <<setw(25)<< sqlite3_column_double(stmt, 4) << endl;
       }
+      cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
   }
 }
