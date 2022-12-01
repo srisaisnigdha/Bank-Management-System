@@ -145,7 +145,8 @@ int main()
     {
           case 1:
           {
-               while(1)
+               int n = 1;
+               while(n)
                {
                 char choice1;
               cout << "-------------------------------------------------------------------------------------------------" << endl;
@@ -192,7 +193,7 @@ int main()
           case 'f':
           {
                 cout<<"Successfully exited from deposits section."<<endl;
-                exit(1);
+                n=0;
                 break;
           }
          default:
@@ -206,7 +207,8 @@ int main()
           }
           case 2:
           {
-                while(1)
+                int m = 1;
+                while(m)
                 {
 
                char choice2;
@@ -266,7 +268,7 @@ int main()
           case 'h':
           {
                 cout<<"Successfully exited from loans section."<<endl;
-                exit(1);
+                m=0;
                 break;
           }
          default:
