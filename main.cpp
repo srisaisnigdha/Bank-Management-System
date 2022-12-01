@@ -135,7 +135,8 @@ int main()
     cout<<"Press [5] to get deposit list \n";
     cout<<"Press [6] to get loans list \n";
     cout<<"Press [7] to get customer list \n";
-    cout<<"Press [8] to exit from bank \n";
+    cout<<"Press [8] if you were a new customer to the bank \n";
+    cout<<"Press [9] to exit from bank \n";
     cout << "-------------------------------------------------------------------------------------------------" << endl;
     cin>>menu;
     getchar();
@@ -160,27 +161,27 @@ int main()
 
     switch(choice1)
     {
-          case a:
+          case 'a':
           {
               obj_a.createAccount();
                 break;
           }
-          case b:
+          case 'b':
           {
                 obj_a.depositMoney();
                 break;
           }
-          case c:
+          case 'c':
           {
                 obj_a.debitMoney();
                 break;
           }
-          case d:
+          case 'd':
           {
                 obj_a.getAccountType();
                 break;
           }
-          case e:
+          case 'e':
           {
                     int acc;
                  cout<<"Enter the account number : ";
@@ -188,7 +189,7 @@ int main()
                obj_a.getAmount(acc);
                 break;
           }
-          case f:
+          case 'f':
           {
                 cout<<"Successfully exited from deposits section."<<endl;
                 exit(1);
@@ -224,17 +225,17 @@ int main()
 
     switch(choice2)
     {
-          case a:
+          case 'a':
           {
               obj_c.createNewLoan();
                 break;
           }
-          case b:
+          case 'b':
           {
                 obj_c.generateEMI();
                 break;
           }
-          case c:
+          case 'c':
           {
                   int acc;
                   cout<<"Enter the account number : ";
@@ -242,27 +243,27 @@ int main()
                 obj_c.getDueDate(acc);
                 break;
           }
-          case d:
+          case 'd':
           {
                 obj_c.payMonthlyEMI();
                 break;
           }
-          case e:
+          case 'e':
           {
                     obj_c.getLoanType();
                 break;
           }
-          case f:
+          case 'f':
           {
                 obj_c.getEMI();
                 break;
           }
-          case g:
+          case 'g':
           {
                 obj_c.getTotalLoanAmt();
                 break;
           }
-          case h:
+          case 'h':
           {
                 cout<<"Successfully exited from loans section."<<endl;
                 exit(1);
@@ -303,6 +304,11 @@ int main()
                 break;
           }
           case 8:
+          {
+                obj_b.newCustomer();
+                break;
+          }
+          case 9:
           {
                 cout<<"Successfully exited from bank."<<endl;
                 exit(1);
