@@ -113,6 +113,7 @@ public:
     void depositAccounts(); // acc num,acc tyPE,cif,balance
     void loanAccounts();    // acc num, acc type,cif,emi
     void loanAccountsDue(); //*
+    void customerList();
 };
 
 int main()
