@@ -7,7 +7,9 @@
 #endif
 #include <cstdlib>
 using namespace std;
-void connection();
+void connection1();
+void connection2();
+void connection3();
 
 void header()
 {
@@ -116,7 +118,7 @@ public:
 int main()
 {
     header();
-    connection();
+    connection1();
     // DepositAccount a;
     Bank b;
     // LoanAccount c;
@@ -146,11 +148,49 @@ int main()
     return 0;
 }
 
-void connection()
+void connection1()
 {
     if (sqlite3_open("bank.db", &db) == SQLITE_OK)
     {
         result = sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS DEPOSITACC(ACCNO INT, TYPE TEXT, CIF INT, BALANCE REAL);", -1, &stmt, NULL);
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+
+        if (result != SQLITE_OK)
+        {
+            cout << "Error: " << sqlite3_errmsg(db) << endl;
+        }
+        else
+        {
+            cout << "Data Inserted Successfully." << endl;
+        }
+    }
+}
+
+void connection2()
+{
+    if (sqlite3_open("bank.db", &db) == SQLITE_OK)
+    {
+        result = sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS CUSTOMERLIST(CIF INT, NAME TEXT, FATHERNAME TEXT, MOBILENO INT, ADDRESS TEXT);", -1, &stmt, NULL);
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+
+        if (result != SQLITE_OK)
+        {
+            cout << "Error: " << sqlite3_errmsg(db) << endl;
+        }
+        else
+        {
+            cout << "Data Inserted Successfully." << endl;
+        }
+    }
+}
+
+void connection3()
+{
+    if (sqlite3_open("bank.db", &db) == SQLITE_OK)
+    {
+        result = sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS LOANACC(ACCNO INT, TYPE TEXT, CIF INT, DATEISSUED TEXT, EMI REAL, PERIOD INT, DUEDATE TEXT, TRANSACTIONS TEXT);", -1, &stmt, NULL);
         sqlite3_step(stmt);
         sqlite3_finalize(stmt);
 
@@ -708,4 +748,32 @@ void Bank::loanAccounts()
         }
         cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
+}
+void Bank::customerList()
+{
+  query = "SELECT CIF,NAME,FATHERNAME,MOBILENO FROM CUSTOMERLIST;";
+  result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+
+  if (result != SQLITE_OK)
+  {
+      cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+  }
+  else
+  {
+      cout<<"The customer list is : "<<endl;
+      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+      cout<<left<<setw(25) <<"CIF"
+                       <<setw(25) <<"NAME"
+                       << setw(25) <<"FATHERNAME"
+                       << setw(25) <<"MOBILENO"<<endl;
+      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+      while (sqlite3_step(stmt) == SQLITE_ROW)
+      {
+           cout <<left<<setw(25)<< sqlite3_column_int(stmt, 0)
+                            <<setw(25)<< sqlite3_column_text(stmt, 1)
+                            <<setw(25)<< sqlite3_column_text(stmt, 2)
+                            <<setw(25)<< sqlite3_column_int64(stmt, 3) << endl;
+      }
+      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+  }
 }
