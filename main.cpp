@@ -11,9 +11,10 @@ void connection();
 
 void header()
 {
-  cout<<"   -------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
-  cout<<"\t\t\t\t\t\t<><><><><><><><><><><><><  SMS BANK  ><><><><><><><><><><><><><>\t\t\t\t\t"<<endl;
-  cout<<"   -------------------------------------------------------------------------------------------------------------------------------------------------------\n"<<endl;
+    cout << "   -------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
+    cout << "\t\t\t\t\t\t<><><><><><><><><><><><><  SMS BANK  ><><><><><><><><><><><><><>\t\t\t\t\t" << endl;
+    cout << "   -------------------------------------------------------------------------------------------------------------------------------------------------------\n"
+         << endl;
 }
 
 sqlite3 *db;
@@ -40,12 +41,12 @@ class DepositAccount
 public:
     int account_number;
     void createAccount();
-    void depositMoney(); //.UPDATE
-    void debitMoney();   //.UPDATE
-    void showTransactions();  //*
-    double getAmount(int); //.SELECT
-    void getHolderName();  //*
-    void getAccountType(); //.SELECT
+    void depositMoney();     //.UPDATE
+    void debitMoney();       //.UPDATE
+    void showTransactions(); //*
+    double getAmount(int);   //.SELECT
+    void getHolderName();    //*
+    void getAccountType();   //.SELECT
 };
 
 class LoanAccount
@@ -81,14 +82,14 @@ class LoanAccount
     }
 
 public:
-    void CreateNewLoan(); // done
-    double generateEMI(); // done
-    string getDueDate(int account_no);//done
-    string findDueDate(string a);//done
-    void payMonthlyEMI();//done
-    void getLoanType();     // done
-    void getEMI();          // done
-    void getTotalLoanAmt(); // done
+    void CreateNewLoan();              // done
+    double generateEMI();              // done
+    string getDueDate(int account_no); // done
+    string findDueDate(string a);      // done
+    void payMonthlyEMI();              // done
+    void getLoanType();                // done
+    void getEMI();                     // done
+    void getTotalLoanAmt();            // done
 };
 
 class Bank
@@ -116,17 +117,17 @@ int main()
 {
     header();
     connection();
-    //DepositAccount a;
+    // DepositAccount a;
     Bank b;
-    //LoanAccount c;
+    // LoanAccount c;
 
-    //b.newCustomer();
+    // b.newCustomer();
 
     // a.createAccount();
-     //c.CreateNewLoan();
-    //b.searchAboutCIF();
-    //b.searchFromCIF();
-    //b.depositAccounts();
+    // c.CreateNewLoan();
+    // b.searchAboutCIF();
+    // b.searchFromCIF();
+    // b.depositAccounts();
     b.loanAccounts();
 
     // a.depositMoney();
@@ -135,12 +136,12 @@ int main()
     // int acc = 4000;
     // a.getAmount(acc);
 
-    //LoanAccount c;
-    //c.CreateNewLoan();
-    //c.getLoanType();
-    //c.getEMI();
-    //c.getTotalLoanAmt();
-    //c.payMonthlyEMI();
+    // LoanAccount c;
+    // c.CreateNewLoan();
+    // c.getLoanType();
+    // c.getEMI();
+    // c.getTotalLoanAmt();
+    // c.payMonthlyEMI();
     sqlite3_close(db);
     return 0;
 }
@@ -172,7 +173,7 @@ void DepositAccount::createAccount()
     account_number = generateAccountNumber();
     cout << "\nSavings Account / Current Account :(S/C) ";
     cin >> x;
-    if (x == 'S' || x=='s')
+    if (x == 'S' || x == 's')
     {
         type = "SavingsAccount";
     }
@@ -342,31 +343,42 @@ string LoanAccount::getDueDate(int account_no)
     {
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
-            d= string( reinterpret_cast< const char* >(sqlite3_column_text(stmt, 6)));
-            cout<<d;
+            d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 6)));
+            cout << d;
             return findDueDate(d);
         }
     }
     return "";
-
 }
 string LoanAccount::findDueDate(string d)
 {
-string due;
+    string due;
     char day;
     string month[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-    string number_of_days[12] = {"31", "28", "31", "30","31", "30", "31", "31", "30", "31", "30", "31"};
-    int year=stoi(d.substr(7,8));
-    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)){number_of_days[1]="29";}
-    for(int m=0;m<12;m++){
-    if(d.substr(0, 3)==month[m]){
-        if(m==12){m=-1;}
-        if(stoi(number_of_days[m+1])<stoi(number_of_days[m])){
-            due=month[m+1]+ ' '+ number_of_days[m+1] +d.substr(6,8);}
-        else{
-        due=month[m+1]+d.substr(3,7);}
-        break;
+    string number_of_days[12] = {"31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"};
+    int year = stoi(d.substr(7, 8));
+    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+    {
+        number_of_days[1] = "29";
     }
+    for (int m = 0; m < 12; m++)
+    {
+        if (d.substr(0, 3) == month[m])
+        {
+            if (m == 12)
+            {
+                m = -1;
+            }
+            if (stoi(number_of_days[m + 1]) < stoi(number_of_days[m]))
+            {
+                due = month[m + 1] + ' ' + number_of_days[m + 1] + d.substr(6, 8);
+            }
+            else
+            {
+                due = month[m + 1] + d.substr(3, 7);
+            }
+            break;
+        }
     }
     return due;
 }
@@ -375,7 +387,7 @@ void LoanAccount::CreateNewLoan()
     char x;
     cout << "CIF Number:";
     cin >> CIF;
-    account_number = generateLoanAccountNumber() ;
+    account_number = generateLoanAccountNumber();
     cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
     cin >> x;
     if (x == 'G')
@@ -393,7 +405,7 @@ void LoanAccount::CreateNewLoan()
     cout << "Principle:";
     cin >> principle;
     emi = generateEMI();
-    due_date=findDueDate(__DATE__);
+    due_date = findDueDate(__DATE__);
     query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,EMI,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?,?,?,?,?);";
     result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
     sqlite3_bind_int(stmt, 1, account_number);
@@ -421,24 +433,24 @@ void LoanAccount::payMonthlyEMI()
 {
     cout << "Account Number:";
     cin >> account_number;
-    string due_date=findDueDate(getDueDate(account_number));
+    string due_date = findDueDate(getDueDate(account_number));
     query = "UPDATE LOANACC SET DUEDATE = ? WHERE ACCNO = ?;";
-    result=sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
 
     sqlite3_bind_text(stmt, 7, due_date.c_str(), due_date.length(), SQLITE_TRANSIENT);
     sqlite3_bind_int(stmt, 2, account_number);
 
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
 
-        if (result != SQLITE_OK)
-        {
-            cout << "FAILED: " << sqlite3_errmsg(db) << endl;
-        }
-        else
-        {
-            cout << "Amount debited Successfully." << endl;
-        }
+    if (result != SQLITE_OK)
+    {
+        cout << "FAILED: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        cout << "Amount debited Successfully." << endl;
+    }
 }
 void LoanAccount::getLoanType()
 {
@@ -570,22 +582,22 @@ void Bank::searchAboutCIF()
     }
     else
     {
-      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
-      cout<<left<<setw(25) <<"NAME"
-                <<setw(25) <<"FATHER'S NAME"
-                << setw(25) <<"MOBILE NO"
-                << setw(25) <<"ADDRESS"<<endl;
-      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cout << left << setw(25) << "NAME"
+             << setw(25) << "FATHER'S NAME"
+             << setw(25) << "MOBILE NO"
+             << setw(25) << "ADDRESS" << endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
-            cout <<left<<setw(25)<< sqlite3_column_text(stmt, 1)
-                            <<setw(25)<< sqlite3_column_text(stmt, 2)
-                            <<setw(25)<< sqlite3_column_int64(stmt, 3)
-                            <<setw(25)<< sqlite3_column_text(stmt, 4) << endl;
+            cout << left << setw(25) << sqlite3_column_text(stmt, 1)
+                 << setw(25) << sqlite3_column_text(stmt, 2)
+                 << setw(25) << sqlite3_column_int64(stmt, 3)
+                 << setw(25) << sqlite3_column_text(stmt, 4) << endl;
 
             return;
         }
-        cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
         cout << "The holder with given CIF number does not exist " << endl;
     }
 }
@@ -607,15 +619,15 @@ void Bank::searchFromCIF()
     else
     {
         // cout<<"The deposit accounts on this CIF number are : "<<endl;
-        cout<<"-------------------------------------------------------------------------------------------------"<<endl;
-        cout<<left<<setw(25) << "Account number" << setw(25) << "Account type "<<endl;
-        cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cout << left << setw(25) << "Account number" << setw(25) << "Account type " << endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
-            cout <<left<< setw(25) << sqlite3_column_int(stmt, 0)
-                        <<setw(25) << sqlite3_column_text(stmt, 1) << endl;
+            cout << left << setw(25) << sqlite3_column_int(stmt, 0)
+                 << setw(25) << sqlite3_column_text(stmt, 1) << endl;
         }
-        cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
 
     query = "SELECT * FROM LOANACC WHERE CIF = ?;";
@@ -630,70 +642,70 @@ void Bank::searchFromCIF()
     else
     {
         // cout<<"The loan accounts on this CIF number are : "<<endl;
-        cout<<"-------------------------------------------------------------------------------------------------"<<endl;
-        cout<<left<<setw(25) << "Account number" << setw(25) << "Account type "<<endl;
-        cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cout << left << setw(25) << "Account number" << setw(25) << "Account type " << endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
-            cout <<left<<setw(25) << sqlite3_column_int(stmt, 0)
-                             <<setw(25) << sqlite3_column_text(stmt, 1) << endl;
+            cout << left << setw(25) << sqlite3_column_int(stmt, 0)
+                 << setw(25) << sqlite3_column_text(stmt, 1) << endl;
         }
-        cout<<"-------------------------------------------------------------------------------------------------"<<endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
 }
 void Bank::depositAccounts()
 {
-  query = "SELECT * FROM DEPOSITACC;";
-  result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    query = "SELECT * FROM DEPOSITACC;";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
 
-  if (result != SQLITE_OK)
-  {
-      cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-  }
-  else
-  {
-      cout<<"All the deposit accounts are : "<<endl;
-      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
-      cout<<left<<setw(25) <<"Account number"
-                       <<setw(25) <<"Account type"
-                       << setw(25) <<"CIF"
-                       << setw(25) <<"BALANCE "<<endl;
-      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
-       while (sqlite3_step(stmt) == SQLITE_ROW)
-      {
-          cout <<left<<setw(25)<< sqlite3_column_int(stmt, 0)
-                            <<setw(25)<< sqlite3_column_text(stmt, 1)
-                            <<setw(25)<< sqlite3_column_int(stmt, 2)
-                            <<setw(25)<< sqlite3_column_double(stmt, 3) << endl;
-      }
-      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
-  }
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        cout << "All the deposit accounts are : " << endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cout << left << setw(25) << "Account number"
+             << setw(25) << "Account type"
+             << setw(25) << "CIF"
+             << setw(25) << "BALANCE " << endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            cout << left << setw(25) << sqlite3_column_int(stmt, 0)
+                 << setw(25) << sqlite3_column_text(stmt, 1)
+                 << setw(25) << sqlite3_column_int(stmt, 2)
+                 << setw(25) << sqlite3_column_double(stmt, 3) << endl;
+        }
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+    }
 }
 void Bank::loanAccounts()
 {
-  query = "SELECT * FROM LOANACC;";
-  result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    query = "SELECT * FROM LOANACC;";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
 
-  if (result != SQLITE_OK)
-  {
-      cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-  }
-  else
-  {
-      cout<<"All the loan accounts are : "<<endl;
-      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
-      cout<<left<<setw(25) <<"Account number"
-                       <<setw(25) <<"Account type"
-                       << setw(25) <<"CIF"
-                       << setw(25) <<"EMI"<<endl;
-      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
-      while (sqlite3_step(stmt) == SQLITE_ROW)
-      {
-           cout <<left<<setw(25)<< sqlite3_column_int(stmt, 0)
-                            <<setw(25)<< sqlite3_column_text(stmt, 1)
-                            <<setw(25)<< sqlite3_column_int(stmt, 2)
-                            <<setw(25)<< sqlite3_column_double(stmt, 4) << endl;
-      }
-      cout<<"-------------------------------------------------------------------------------------------------"<<endl;
-  }
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        cout << "All the loan accounts are : " << endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cout << left << setw(25) << "Account number"
+             << setw(25) << "Account type"
+             << setw(25) << "CIF"
+             << setw(25) << "EMI" << endl;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            cout << left << setw(25) << sqlite3_column_int(stmt, 0)
+                 << setw(25) << sqlite3_column_text(stmt, 1)
+                 << setw(25) << sqlite3_column_int(stmt, 2)
+                 << setw(25) << sqlite3_column_double(stmt, 4) << endl;
+        }
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+    }
 }
