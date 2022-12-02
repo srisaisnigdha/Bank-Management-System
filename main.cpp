@@ -44,12 +44,12 @@ class DepositAccount
 public:
     int account_number;
     void createAccount();
-    void depositMoney();     
-    void debitMoney();       
-    void showTransactions(); 
-    double getAmount(int);   
-    void getHolderName();    
-    void getAccountType();   
+    void depositMoney();
+    void debitMoney();
+    void showTransactions();
+    double getAmount(int);
+    void getHolderName();
+    void getAccountType();
     void deleteDepositAccount(int account_no);
 };
 class LoanAccount
@@ -123,7 +123,7 @@ public:
 
 int main()
 {
-    //header();
+    // header();
     connection1();
     DepositAccount obj_a;
     connection2();
