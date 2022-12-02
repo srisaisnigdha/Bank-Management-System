@@ -7,6 +7,12 @@
 #endif
 #include <cstdlib>
 using namespace std;
+
+sqlite3 *db;
+sqlite3_stmt *stmt;
+int result;
+string query;
+
 void connection1();
 void connection2();
 void connection3();
@@ -18,11 +24,6 @@ void header()
     cout << "   -------------------------------------------------------------------------------------------------------------------------------------------------------\n"
          << endl;
 }
-
-sqlite3 *db;
-sqlite3_stmt *stmt;
-int result;
-string query;
 
 class Printer
 {
@@ -43,16 +44,13 @@ class DepositAccount
 public:
     int account_number;
     void createAccount();
-    void depositMoney();     //.UPDATE
-    void debitMoney();       //.UPDATE
-    void showTransactions(); //*
-    double getAmount(int);   //.SELECT
-    void getHolderName();    //*
-    void getAccountType();   //.SELECT
-<<<<<<< Updated upstream
-=======
+    void depositMoney();     
+    void debitMoney();       
+    void showTransactions(); 
+    double getAmount(int);   
+    void getHolderName();    
+    void getAccountType();   
     void deleteDepositAccount(int account_no);
->>>>>>> Stashed changes
 };
 class LoanAccount
 {
@@ -87,21 +85,11 @@ class LoanAccount
     }
 
 public:
-<<<<<<< Updated upstream
-    void createNewLoan();              // done
-    double generateEMI();              // done
-    string getDueDate(int account_no); // done
-    string findDueDate(string a);      // done
-    void payMonthlyEMI();              // done
-    void getLoanType();                // done
-    void getEMI();                     // done
-    void getTotalLoanAmt();            // done
-=======
     double generateEMI();         // done
     string findDueDate(string a); // done
     string getDateIssued(int account_no);
     string getDueDate(int account_no); // done
-    void CreateNewLoan();              // done
+    void createNewLoan();              // done
     bool isPeriodOver(int);
     int getPeriod(int);
     void payMonthlyEMI();   // done
@@ -109,7 +97,6 @@ public:
     void getEMI();          // done
     void getTotalLoanAmt(); // done
     void deleteLoanAccount(int);
->>>>>>> Stashed changes
 };
 
 class Bank
@@ -136,7 +123,7 @@ public:
 
 int main()
 {
-<<<<<<< Updated upstream
+    //header();
     connection1();
     DepositAccount obj_a;
     connection2();
@@ -248,7 +235,7 @@ int main()
                 {
                 case 'a':
                 {
-                    obj_c.createNewLoan();
+                    // obj_c.createNewLoan();
                     break;
                 }
                 case 'b':
@@ -367,35 +354,6 @@ int main()
     //  c.getEMI();
     //  c.getTotalLoanAmt();
     //  c.payMonthlyEMI();
-=======
-    header();
-    connection();
-    // DepositAccount a;
-    Bank b;
-    // LoanAccount c;
-
-    // b.newCustomer();
-
-    // a.createAccount();
-    // c.CreateNewLoan();
-    // b.searchAboutCIF();
-    // b.searchFromCIF();
-    // b.depositAccounts();
-    // b.loanAccounts();
-
-    // a.depositMoney();
-    // a.debitMoney();
-    // a.getAccountType();
-    // int acc = 4000;
-    // a.getAmount(acc);
-
-    LoanAccount c;
-    // c.CreateNewLoan();
-    // c.getLoanType();
-    // c.getEMI();
-    // c.getTotalLoanAmt();
-    c.payMonthlyEMI();
->>>>>>> Stashed changes
     sqlite3_close(db);
     return 0;
 }
@@ -705,48 +663,14 @@ string LoanAccount::getDateIssued(int account_no)
     {
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
-<<<<<<< Updated upstream
-            d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 6)));
-            cout << d;
-            return findDueDate(d);
-=======
             d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 3)));
             return d;
->>>>>>> Stashed changes
         }
     }
     return "";
 }
 string LoanAccount::getDueDate(int account_no)
 {
-<<<<<<< Updated upstream
-    string due;
-    char day;
-    string month[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-    string number_of_days[12] = {"31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"};
-    int year = stoi(d.substr(7, 8));
-    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
-    {
-        number_of_days[1] = "29";
-    }
-    for (int m = 0; m < 12; m++)
-    {
-        if (d.substr(0, 3) == month[m])
-        {
-            if (m == 12)
-            {
-                m = -1;
-            }
-            if (stoi(number_of_days[m + 1]) < stoi(number_of_days[m]))
-            {
-                due = month[m + 1] + ' ' + number_of_days[m + 1] + d.substr(6, 8);
-            }
-            else
-            {
-                due = month[m + 1] + d.substr(3, 7);
-            }
-            break;
-=======
     string d;
     query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
 
@@ -764,7 +688,6 @@ string LoanAccount::getDueDate(int account_no)
         {
             d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 6)));
             return d;
->>>>>>> Stashed changes
         }
     }
 }
@@ -913,13 +836,10 @@ void LoanAccount::payMonthlyEMI()
     else
     {
         cout << "Amount debited Successfully." << endl;
-<<<<<<< Updated upstream
-=======
         if (isPeriodOver(account_number))
         {
             deleteLoanAccount(account_number);
         }
->>>>>>> Stashed changes
     }
 }
 void LoanAccount::getLoanType()
@@ -1178,7 +1098,6 @@ void Bank::loanAccounts()
         }
         cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
-<<<<<<< Updated upstream
 }
 void Bank::customerList()
 {
@@ -1207,6 +1126,4 @@ void Bank::customerList()
         }
         cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
-=======
->>>>>>> Stashed changes
 }
