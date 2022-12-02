@@ -19,9 +19,9 @@ void connection3();
 
 void header()
 {
-    cout << "   -------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
+    cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
     cout << "\t\t\t\t\t\t<><><><><><><><><><><><><  SMS BANK  ><><><><><><><><><><><><><>\t\t\t\t\t" << endl;
-    cout << "   -------------------------------------------------------------------------------------------------------------------------------------------------------\n"
+    cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------\n"
          << endl;
 }
 
@@ -129,11 +129,9 @@ int main()
     Bank obj_b;
     connection3();
     LoanAccount obj_c;
-    while (1)
-    {
         system("clear");
         cout.flush();
-        sleep(3);
+        sleep(2);
         header();
          int menu;
         cout << "-------------------------------------------------------------------------------------------------" << endl;
@@ -154,12 +152,9 @@ int main()
         {
         case 1:
         {
-            int n = 1;
-            while (n)
-            {
                  system("clear");
         cout.flush();
-        sleep(3);
+        sleep(2);
         header();
                 char choice1;
                 cout << "-------------------------------------------------------------------------------------------------" << endl;
@@ -179,7 +174,7 @@ int main()
                 {
                         system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     obj_a.createAccount();
                     break;
@@ -188,7 +183,7 @@ int main()
                 {
                           system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     obj_a.depositMoney();
                     break;
@@ -197,7 +192,7 @@ int main()
                 {
                           system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     obj_a.debitMoney();
                     break;
@@ -206,7 +201,7 @@ int main()
                 {
                           system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     obj_a.getAccountType();
                     break;
@@ -215,7 +210,7 @@ int main()
                 {
                          system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                         int acc;
                     cout << "Enter the account number : ";
@@ -227,33 +222,28 @@ int main()
                 {
                          system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     cout << "Successfully exited from deposits section." << endl;
-                    n = 0;
                     break;
                 }
                 default:
                 {
                          system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     cout << "!!Please press the valid key!!" << endl;
                     break;
                 }
                 }
-            }
             break;
         }
         case 2:
         {
-            int m = 1;
-            while (m)
-            {
                   system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                 char choice2;
                 cout << "-------------------------------------------------------------------------------------------------" << endl;
@@ -275,7 +265,7 @@ int main()
                 {
                       system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                  obj_c.createNewLoan();
                     break;
@@ -284,7 +274,7 @@ int main()
                 {
                          system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     obj_c.generateEMI();
                     break;
@@ -293,7 +283,7 @@ int main()
                 {
                            system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     int acc;
                     cout << "Enter the account number : ";
@@ -305,7 +295,7 @@ int main()
                 {
                            system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     obj_c.payMonthlyEMI();
                     break;
@@ -314,7 +304,7 @@ int main()
                 {
                          system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     obj_c.getLoanType();
                     break;
@@ -323,7 +313,7 @@ int main()
                 {
                          system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     obj_c.getEMI();
                     break;
@@ -332,7 +322,7 @@ int main()
                 {
                           system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     obj_c.getTotalLoanAmt();
                     break;
@@ -341,30 +331,28 @@ int main()
                 {
                          system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     cout << "Successfully exited from loans section." << endl;
-                    m = 0;
                     break;
                 }
                 default:
                 {
                           system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
                     cout << "!!Please press the valid key!!" << endl;
                     break;
                 }
-                }
-            }
+              }
             break;
         }
         case 3:
         {
                system("clear");
                         cout.flush();
-                        sleep(3);
+                        sleep(2);
                         header();
             obj_b.searchFromCIF();
             break;
@@ -373,7 +361,7 @@ int main()
         {
               system("clear");
               cout.flush();
-              sleep(3);
+              sleep(2);
               header();
             obj_b.searchAboutCIF();
             break;
@@ -382,7 +370,7 @@ int main()
         {
               system("clear");
               cout.flush();
-              sleep(3);
+              sleep(2);
               header();
             obj_b.depositAccounts();
             break;
@@ -391,7 +379,7 @@ int main()
         {
               system("clear");
               cout.flush();
-              sleep(3);
+              sleep(2);
               header();
             obj_b.loanAccounts();
             break;
@@ -400,7 +388,7 @@ int main()
         {
                system("clear");
               cout.flush();
-              sleep(3);
+              sleep(2);
               header();
             obj_b.customerList();
             break;
@@ -409,7 +397,7 @@ int main()
         {
                system("clear");
               cout.flush();
-              sleep(3);
+              sleep(2);
               header();
             obj_b.newCustomer();
             break;
@@ -418,7 +406,7 @@ int main()
         {
                system("clear");
               cout.flush();
-              sleep(3);
+              sleep(2);
               header();
             cout << "Successfully exited from bank." << endl;
             exit(1);
@@ -428,13 +416,12 @@ int main()
         {
               system("clear");
               cout.flush();
-              sleep(3);
+              sleep(2);
               header();
             cout << "!!Please press the valid key!!" << endl;
             break;
         }
         }
-    }
     // header();
     // connection1();
     // DepositAccount a;
