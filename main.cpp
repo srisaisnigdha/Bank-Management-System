@@ -7,19 +7,7 @@
 #endif
 #include <cstdlib>
 using namespace std;
-<<<<<<< Updated upstream
-=======
 void connection();
-
-void header()
-{
-    cout << "   -------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
-    cout << "\t\t\t\t\t\t<><><><><><><><><><><><><  SMS BANK  ><><><><><><><><><><><><><>\t\t\t\t\t" << endl;
-    cout << "   -------------------------------------------------------------------------------------------------------------------------------------------------------\n"
-         << endl;
-}
->>>>>>> Stashed changes
-
 sqlite3 *db;
 sqlite3_stmt *stmt;
 int result;
@@ -56,21 +44,12 @@ class DepositAccount
 public:
     int account_number;
     void createAccount();
-<<<<<<< Updated upstream
     void depositMoney();     
     void debitMoney();       
     void showTransactions(); 
     double getAmount(int);   
     void getHolderName();    
     void getAccountType();   
-=======
-    void depositMoney();     //.UPDATE
-    void debitMoney();       //.UPDATE
-    void showTransactions(); //*
-    double getAmount(int);   //.SELECT
-    void getHolderName();    //*
-    void getAccountType();   //.SELECT
->>>>>>> Stashed changes
     void deleteDepositAccount(int account_no);
 };
 class LoanAccount
@@ -110,11 +89,7 @@ public:
     string findDueDate(string a); // done
     string getDateIssued(int account_no);
     string getDueDate(int account_no); // done
-<<<<<<< Updated upstream
     void createNewLoan();              // done
-=======
-    void CreateNewLoan();              // done
->>>>>>> Stashed changes
     bool isPeriodOver(int);
     int getPeriod(int);
     void payMonthlyEMI();   // done
@@ -148,7 +123,6 @@ public:
 
 int main()
 {
-<<<<<<< Updated upstream
     //header();
     connection1();
     DepositAccount obj_a;
@@ -380,35 +354,6 @@ int main()
     //  c.getEMI();
     //  c.getTotalLoanAmt();
     //  c.payMonthlyEMI();
-=======
-    header();
-    connection();
-    // DepositAccount a;
-    Bank b;
-    // LoanAccount c;
-
-    // b.newCustomer();
-
-    // a.createAccount();
-    // c.CreateNewLoan();
-    // b.searchAboutCIF();
-    // b.searchFromCIF();
-    // b.depositAccounts();
-    // b.loanAccounts();
-
-    // a.depositMoney();
-    // a.debitMoney();
-    // a.getAccountType();
-    // int acc = 4000;
-    // a.getAmount(acc);
-
-    LoanAccount c;
-    // c.CreateNewLoan();
-    // c.getLoanType();
-    // c.getEMI();
-    // c.getTotalLoanAmt();
-    c.payMonthlyEMI();
->>>>>>> Stashed changes
     sqlite3_close(db);
     return 0;
 }
@@ -1153,7 +1098,6 @@ void Bank::loanAccounts()
         }
         cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
-<<<<<<< Updated upstream
 }
 void Bank::customerList()
 {
@@ -1182,6 +1126,4 @@ void Bank::customerList()
         }
         cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
-=======
->>>>>>> Stashed changes
 }
