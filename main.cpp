@@ -49,8 +49,11 @@ public:
     double getAmount(int);   //.SELECT
     void getHolderName();    //*
     void getAccountType();   //.SELECT
+<<<<<<< Updated upstream
+=======
+    void deleteDepositAccount(int account_no);
+>>>>>>> Stashed changes
 };
-
 class LoanAccount
 {
     int CIF;
@@ -84,6 +87,7 @@ class LoanAccount
     }
 
 public:
+<<<<<<< Updated upstream
     void createNewLoan();              // done
     double generateEMI();              // done
     string getDueDate(int account_no); // done
@@ -92,6 +96,20 @@ public:
     void getLoanType();                // done
     void getEMI();                     // done
     void getTotalLoanAmt();            // done
+=======
+    double generateEMI();         // done
+    string findDueDate(string a); // done
+    string getDateIssued(int account_no);
+    string getDueDate(int account_no); // done
+    void CreateNewLoan();              // done
+    bool isPeriodOver(int);
+    int getPeriod(int);
+    void payMonthlyEMI();   // done
+    void getLoanType();     // done
+    void getEMI();          // done
+    void getTotalLoanAmt(); // done
+    void deleteLoanAccount(int);
+>>>>>>> Stashed changes
 };
 
 class Bank
@@ -118,6 +136,7 @@ public:
 
 int main()
 {
+<<<<<<< Updated upstream
     connection1();
     DepositAccount obj_a;
     connection2();
@@ -348,6 +367,35 @@ int main()
     //  c.getEMI();
     //  c.getTotalLoanAmt();
     //  c.payMonthlyEMI();
+=======
+    header();
+    connection();
+    // DepositAccount a;
+    Bank b;
+    // LoanAccount c;
+
+    // b.newCustomer();
+
+    // a.createAccount();
+    // c.CreateNewLoan();
+    // b.searchAboutCIF();
+    // b.searchFromCIF();
+    // b.depositAccounts();
+    // b.loanAccounts();
+
+    // a.depositMoney();
+    // a.debitMoney();
+    // a.getAccountType();
+    // int acc = 4000;
+    // a.getAmount(acc);
+
+    LoanAccount c;
+    // c.CreateNewLoan();
+    // c.getLoanType();
+    // c.getEMI();
+    // c.getTotalLoanAmt();
+    c.payMonthlyEMI();
+>>>>>>> Stashed changes
     sqlite3_close(db);
     return 0;
 }
@@ -562,6 +610,34 @@ void DepositAccount::getAccountType()
         cout << "The account with given account number does not exist " << endl;
     }
 }
+void DepositAccount::deleteDepositAccount(int account_no)
+{
+    char confirm;
+    cout << "\t\t-CONFORMATION-\nAre You Sure? (Y/N): ";
+    cin >> confirm;
+    if (confirm == 'Y' || 'y')
+    {
+        query = "DELETE FROM DEPOSITACC WHERE ACCNO=?";
+        result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+        sqlite3_bind_int(stmt, 1, account_no);
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+
+        if (result == SQLITE_OK)
+        {
+            cout << "\n Data Deleted Successfully." << endl;
+        }
+        else
+        {
+            cout << "\nFailed: " << sqlite3_errmsg(db) << endl;
+        }
+    }
+    else
+    {
+        cout << "Deletion Operation Stopped." << endl;
+    }
+}
+
 double LoanAccount::generateEMI()
 {
     double emi_amt, i;
@@ -571,7 +647,49 @@ double LoanAccount::generateEMI()
     emi_amt = (principle * i * pow(1 + i, period)) / (pow(1 + i, period) - 1);
     return emi_amt;
 }
-string LoanAccount::getDueDate(int account_no)
+
+string LoanAccount::findDueDate(string d)
+{
+    string due = "";
+    string yr = d.substr(7, 4);
+    int n;
+    string month[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    string number_of_days[12] = {"31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"};
+    int year = stoi(yr);
+    cout << year;
+    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+    {
+        number_of_days[1] = "29";
+    }
+    for (int m = 0; m < 12; m++)
+    {
+        if (d.substr(0, 3) == month[m])
+        {
+            n = m + 1;
+            if (m == 11)
+            {
+                n = 0;
+                yr = to_string(year + 1);
+            }
+            // if dec to jan => yr needs to change............
+            if (stoi(number_of_days[n]) < stoi(number_of_days[m]) && d.substr(4, 2) == number_of_days[m])
+            {
+                due = month[n] + ' ' + number_of_days[n] + ' ' + yr;
+            }
+            else
+            {
+                due = month[n] + d.substr(3, 4) + yr;
+            }
+            break;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    return due;
+}
+string LoanAccount::getDateIssued(int account_no)
 {
     string d;
     query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
@@ -587,15 +705,21 @@ string LoanAccount::getDueDate(int account_no)
     {
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
+<<<<<<< Updated upstream
             d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 6)));
             cout << d;
             return findDueDate(d);
+=======
+            d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 3)));
+            return d;
+>>>>>>> Stashed changes
         }
     }
     return "";
 }
-string LoanAccount::findDueDate(string d)
+string LoanAccount::getDueDate(int account_no)
 {
+<<<<<<< Updated upstream
     string due;
     char day;
     string month[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
@@ -622,9 +746,27 @@ string LoanAccount::findDueDate(string d)
                 due = month[m + 1] + d.substr(3, 7);
             }
             break;
+=======
+    string d;
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_no);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+        return "";
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 6)));
+            return d;
+>>>>>>> Stashed changes
         }
     }
-    return due;
 }
 void LoanAccount::createNewLoan()
 {
@@ -645,7 +787,9 @@ void LoanAccount::createNewLoan()
     date = __DATE__;
     string s = "-";
     string due_date;
-    int period = 1;
+    int period;
+    cout << "Period:";
+    cin >> period;
     cout << "Principle:";
     cin >> principle;
     emi = generateEMI();
@@ -673,6 +817,81 @@ void LoanAccount::createNewLoan()
         cout << "Data Inserted Successfully." << endl;
     }
 }
+int LoanAccount::getPeriod(int account_no)
+{
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_no);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            return sqlite3_column_int(stmt, 5);
+        }
+        cout << "Error. " << endl;
+    }
+}
+bool LoanAccount::isPeriodOver(int account_no)
+{
+    int period = getPeriod(account_no);
+    cout << period;
+    int d1, m1, y1, d2, m2, y2;
+    string date1, date2;
+    date1 = getDateIssued(account_no);
+    date2 = getDueDate(account_no);
+    string month[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    int month_Days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    y1 = stoi(date1.substr(7, 4));
+    y2 = stoi(date2.substr(7, 4));
+    for (int m = 0; m < 12; m++)
+    {
+        if (date1.substr(0, 3) == month[m])
+        {
+            m1 = m + 1;
+        }
+    }
+    for (int m = 0; m < 12; m++)
+    {
+        if (date2.substr(0, 3) == month[m])
+        {
+            m2 = m + 1;
+        }
+    }
+
+    if (m1 < m2 && y2 - y1 >= period)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void LoanAccount::deleteLoanAccount(int account_no)
+{
+    query = "DELETE FROM LOANACC WHERE ACCNO=?";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_no);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+
+    if (result == SQLITE_OK)
+    {
+        cout << "\n Data Deleted Successfully." << endl;
+    }
+    else
+    {
+        cout << "\nFailed: " << sqlite3_errmsg(db) << endl;
+    }
+}
 void LoanAccount::payMonthlyEMI()
 {
     cout << "Account Number:";
@@ -681,7 +900,7 @@ void LoanAccount::payMonthlyEMI()
     query = "UPDATE LOANACC SET DUEDATE = ? WHERE ACCNO = ?;";
     result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
 
-    sqlite3_bind_text(stmt, 7, due_date.c_str(), due_date.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 1, due_date.c_str(), due_date.length(), SQLITE_TRANSIENT);
     sqlite3_bind_int(stmt, 2, account_number);
 
     sqlite3_step(stmt);
@@ -694,6 +913,13 @@ void LoanAccount::payMonthlyEMI()
     else
     {
         cout << "Amount debited Successfully." << endl;
+<<<<<<< Updated upstream
+=======
+        if (isPeriodOver(account_number))
+        {
+            deleteLoanAccount(account_number);
+        }
+>>>>>>> Stashed changes
     }
 }
 void LoanAccount::getLoanType()
@@ -952,6 +1178,7 @@ void Bank::loanAccounts()
         }
         cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
+<<<<<<< Updated upstream
 }
 void Bank::customerList()
 {
@@ -980,4 +1207,6 @@ void Bank::customerList()
         }
         cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
+=======
+>>>>>>> Stashed changes
 }
