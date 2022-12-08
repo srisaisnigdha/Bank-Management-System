@@ -84,5 +84,15 @@ g++ main.cpp -l sqlite3
 ## Sample Database
 
 
-sample database..
+- Customer Table:
+  
+  ![Screenshot from 2022-12-09 03-17-13](https://user-images.githubusercontent.com/107610309/206575274-a5de3047-1fe1-4a70-8e7f-207adcfdbefb.png)
+
+- Deposits Table:
+  
+  ![Screenshot from 2022-12-09 03-17-20](https://user-images.githubusercontent.com/107610309/206575355-d24aba84-741f-413f-b2af-895d440d588f.png)
+
+- Loans Table:
+  
+  ![Screenshot from 2022-12-09 03-15-25](https://user-images.githubusercontent.com/107610309/206575426-6281e1e7-d3f8-4cc7-804d-27fdaa71e277.png)
 
