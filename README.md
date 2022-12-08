@@ -2,6 +2,7 @@
 
 > To offer efficiently organised Bank Servies.
 
+## List of Contents \-
 - [Team Members](#team-members)
 - [Introduction](#introduction)
 - [Features](#features)
