@@ -77,63 +77,12 @@ void connection3()
 
 class Printer
 {
-public:
-    void header()
-    {
-        cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
-        cout << "\t\t\t\t\t\t<><><><><><><><><><><><><  SMS BANK  ><><><><><><><><><><><><><>\t\t\t\t\t" << endl;
-        cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------\n"
-             << endl;
-    }
-    int menu()
-    {
-        int option;
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cout << "Press [1] to enter into deposits section \n";
-        cout << "Press [2] to enter into loans section \n";
-        cout << "Press [3] to get accounts of given CIF \n";
-        cout << "Press [4] to get given CIF details \n";
-        cout << "Press [5] to get deposit list \n";
-        cout << "Press [6] to get loans list \n";
-        cout << "Press [7] to get customer list \n";
-        cout << "Press [8] if you were a new customer to the bank \n";
-        cout << "Press [9] to exit from bank \n";
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cin >> option;
-        getchar();
-        return option;
-    }
-    int menuForChoice1()
-    {
-        int choice;
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cout << "Press [a] to create account \n";
-        cout << "Press [b] to deposit money \n";
-        cout << "Press [c] to debit money \n";
-        cout << "Press [d] to get account type \n";
-        cout << "Press [e] to fetch balance \n";
-        cout << "Press [f] to exit from deposits section \n";
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cin >> choice;
-        getchar();
-    }
-    char menuForChoice2()
-    {
-        char choice;
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cout << "Press [a] to create new loan \n";
-        cout << "Press [b] to generate EMI \n";
-        cout << "Press [c] to get due date \n";
-        cout << "Press [d] to pay monthly EMI \n";
-        cout << "Press [e] to get loan type \n";
-        cout << "Press [f] to get EMI \n";
-        cout << "Press [g] to get total loan amount \n";
-        cout << "Press [h] to exit from loans section \n";
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cin >> choice;
-        getchar();
-        return choice;
-    }
+    public:
+    void windowChange();
+    void header();
+    int menu();
+    char menuForChoice1();
+    char menuForChoice2();
 };
 
 class Bank
@@ -154,7 +103,6 @@ public:
     void searchFromCIF();
     void depositAccounts();
     void loanAccounts();
-    void loanAccountsDue(); //*
     void customerList();
     int checkCIF(int);
     friend class DepositAccount;
@@ -178,11 +126,8 @@ public:
     void createAccount(Bank &);
     void depositMoney();
     void debitMoney();
-    void showTransactions(); //*
     double getAmount(int);
-    void getHolderName(); //*
     void getAccountType();
-
     void deleteDepositAccount(int account_no);
 };
 
@@ -243,68 +188,47 @@ int main()
     z.connection1();
     z.connection2();
     z.connection3();
-    
-    system("clear");
-    cout.flush();
-    sleep(2);
-    p.header();
+
+    p.windowChange();
     int option = p.menu();
 
     switch (option)
     {
     case 1:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
+        p.windowChange();
         char choice1 = p.menuForChoice1();
 
         switch (choice1)
         {
         case 'a':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+              p.windowChange();
             obj_a.createAccount(obj_b);
             break;
         }
         case 'b':
-        {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+      {
+              p.windowChange();
             obj_a.depositMoney();
             break;
-        }
+       }
         case 'c':
-        {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
-            obj_a.debitMoney();
+      {
+             p.windowChange();
+           obj_a.debitMoney();
             break;
-        }
+      }
         case 'd':
-        {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
-            obj_a.getAccountType();
+      {
+             p.windowChange();
+           obj_a.getAccountType();
             break;
-        }
+      }
         case 'e':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
-            int acc;
+             p.windowChange();
+               int acc;
             cout << "Enter the account number : ";
             cin >> acc;
             obj_a.getAmount(acc);
@@ -312,20 +236,14 @@ int main()
         }
         case 'f':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+              p.windowChange();
             cout << "Successfully exited from deposits section." << endl;
             break;
         }
         default:
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
-            cout << "!!Please press the valid key!!" << endl;
+              p.windowChange();
+            cout << "!!Please enter  the valid key!!" << endl;
             break;
         }
         }
@@ -333,38 +251,26 @@ int main()
     }
     case 2:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
+        p.windowChange();
         char choice2 =p.menuForChoice2();
-        
+
         switch (choice2)
         {
         case 'a':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+            p.windowChange();
             obj_c.createNewLoan(obj_b);
             break;
         }
         case 'b':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+            p.windowChange();
             obj_c.generateEMI();
             break;
         }
         case 'c':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+            p.windowChange();
             int acc;
             cout << "Enter the account number : ";
             cin >> acc;
@@ -373,56 +279,38 @@ int main()
         }
         case 'd':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+            p.windowChange();
             obj_c.payMonthlyEMI();
             break;
         }
         case 'e':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+            p.windowChange();
             obj_c.getLoanType();
             break;
         }
         case 'f':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+            p.windowChange();
             obj_c.getEMI();
             break;
         }
         case 'g':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+            p.windowChange();
             obj_c.getTotalLoanAmt();
             break;
         }
         case 'h':
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
+            p.windowChange();
             cout << "Successfully exited from loans section." << endl;
             break;
         }
         default:
         {
-            system("clear");
-            cout.flush();
-            sleep(2);
-            p.header();
-            cout << "!!Please press the valid key!!" << endl;
+            p.windowChange();
+            cout << "!!Please  enter the valid key!!" << endl;
             break;
         }
         }
@@ -430,598 +318,118 @@ int main()
     }
     case 3:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
+        p.windowChange();
         obj_b.searchFromCIF();
         break;
     }
     case 4:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
+        p.windowChange();
         obj_b.searchAboutCIF();
         break;
     }
     case 5:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
+        p.windowChange();
         obj_b.depositAccounts();
         break;
     }
     case 6:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
+        p.windowChange();
         obj_b.loanAccounts();
         break;
     }
     case 7:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
+        p.windowChange();
         obj_b.customerList();
         break;
     }
     case 8:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
+        p.windowChange();
         obj_b.newCustomer();
         break;
     }
     case 9:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
+        p.windowChange();
         cout << "Successfully exited from bank." << endl;
         exit(1);
         break;
     }
     default:
     {
-        system("clear");
-        cout.flush();
-        sleep(2);
-        p.header();
-        cout << "!!Please press the valid key!!" << endl;
+        p.windowChange();
+        cout << "!!Please enter  the valid key!!" << endl;
         break;
     }
     }
-
     sqlite3_close(db);
     return 0;
 }
 
-void DepositAccount::createAccount(Bank &obj)
-{
-    char x;
-    cout << "CIF Number:";
-    cin >> CIF;
-    if (obj.checkCIF(CIF) == 0)
+void Printer::windowChange()
+ {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+ }
+
+ void Printer::header()
     {
-        cout << "The entered CIF number doesn't exist, please enter a valid CIF number!!" << endl;
-        return;
+        cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
+        cout << "\t\t\t\t\t\t<><><><><><><><><><><><><  SMS BANK  ><><><><><><><><><><><><><>\t\t\t\t\t" << endl;
+        cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------\n"
+             << endl;
     }
-    account_number = generateAccountNumber();
-    cout << "\nSavings Account / Current Account :(S/C) ";
-    cin >> x;
-    if (x == 'S' || x == 's')
+    int Printer::menu()
     {
-        type = "SavingsAccount";
+        int option;
+        cout << "  [1]\t  DEPOSITS \n\n";
+        cout << "  [2]\t  LOANS \n\n";
+        cout << "  [3]\t  GET ACCOUNTS FROM CIF \n\n";
+        cout << "  [4]\t  GET CIF DETAILS\n\n";
+        cout << "  [5]\t  DEPOSIT LIST \n\n";
+        cout << "  [6]\t  LOANS LIST\n\n";
+        cout << "  [7]\t  CUSTOMER LIST \n\n";
+        cout << "  [8]\t  NEW CUSTOMER \n\n";
+        cout << "  [9]\t  EXIT\n\n";
+        cin >> option;
+        getchar();
+        return option;
     }
-    else
+    char Printer::menuForChoice1()
     {
-        type = "CurrentAccount";
+        char choice;
+        cout << "  [a]\t  NEW ACCOUNT \n\n";
+        cout << "  [b]\t  DEPOSIT MONEY \n\n";
+        cout << "  [c]\t  DEBIT MONEY\n\n";
+        cout << "  [d]\t  GET ACCOUNT TYPE \n\n";
+        cout << "  [e]\t  FETCH BALANCE \n\n";
+        cout << "  [f]\t   EXIT \n\n";
+        cin >> choice;
+        getchar();
+         return choice;
     }
-    query = "INSERT INTO  DEPOSITACC(ACCNO, TYPE, CIF, BALANCE) VALUES(?,?,?,0);";
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_number);
-    sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
-    sqlite3_bind_int(stmt, 3, CIF);
-
-    sqlite3_step(stmt);
-    sqlite3_finalize(stmt);
-    if (result != SQLITE_OK)
+    char Printer::menuForChoice2()
     {
-        cout << "Error: " << sqlite3_errmsg(db) << endl;
+        char choice;
+        cout << "  [a]\t  NEW LOAN\n\n";
+        cout << "  [b]\t  GENERATE EMI\n\n";
+        cout << "  [c]\t  GET DUE DATE \n\n";
+        cout << "  [d]\t  PAY MONTHLY EMI\n\n";
+        cout << "  [e]\t  GET LOAN TYPE\n\n";
+        cout << "  [f]\t   GET EMI \n\n";
+        cout << "  [g]\t  GET TOTAL LOAN AMOUNT\n\n";
+        cout << "  [h]\t  EXIT\n\n";
+        cin >> choice;
+        getchar();
+        return choice;
     }
-    else
-    {
-        cout << "Data Inserted Successfully." << endl;
-    }
-}
-
-void DepositAccount::depositMoney()
-{
-    double depo_amt;
-    cout << "\nType account no. to deposit money: \n";
-    cin >> account_number;
-    getchar();
-
-    cout << "Enter the amount to be deposited: \n";
-    cin >> depo_amt;
-
-    double pre_bal = getAmount(account_number);
-
-    query = "UPDATE DEPOSITACC SET BALANCE = ? WHERE ACCNO = ?;";
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-
-    sqlite3_bind_double(stmt, 1, (depo_amt + pre_bal));
-    sqlite3_bind_int(stmt, 2, account_number);
-
-    sqlite3_step(stmt);
-    sqlite3_finalize(stmt);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "FAILED: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        cout << "Amount deposited Successfully." << endl;
-        getAmount(account_number);
-    }
-}
-
-void DepositAccount::debitMoney()
-{
-    double debit_amt;
-    cout << "\n Type account no. to debit money: \n";
-    cin >> account_number;
-    getchar();
-
-    cout << "Enter the amount to be debited : \n";
-    cin >> debit_amt;
-
-    double pre_bal = getAmount(account_number);
-    if (pre_bal < debit_amt)
-    {
-        cout << "The balance in your account is less than the amount you need to debit !!" << endl;
-    }
-    else
-    {
-        query = "UPDATE DEPOSITACC SET BALANCE = ? WHERE ACCNO = ?;";
-        result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-
-        sqlite3_bind_double(stmt, 1, (pre_bal - debit_amt));
-        sqlite3_bind_int(stmt, 2, account_number);
-
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-
-        if (result != SQLITE_OK)
-        {
-            cout << "FAILED: " << sqlite3_errmsg(db) << endl;
-        }
-        else
-        {
-            cout << "Amount debited Successfully." << endl;
-            getAmount(account_number);
-        }
-    }
-}
-
-double DepositAccount::getAmount(int account_no)
-{
-    query = "SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
-
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_no);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            double r = sqlite3_column_double(stmt, 3);
-            cout << "The balance in your account is: " << r << endl;
-            return r;
-        }
-        cout << "The account with given account number does not exist " << endl;
-    }
-    return 0;
-}
-void DepositAccount::getAccountType()
-{
-    cout << "Enter the account number to get it's account type : ";
-    cin >> account_number;
-    getchar();
-
-    query = "SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
-
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_number);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            cout << "your account type is: " << sqlite3_column_text(stmt, 1) << endl;
-            return;
-        }
-        cout << "The account with given account number does not exist " << endl;
-    }
-}
-void DepositAccount::deleteDepositAccount(int account_no)
-{
-    char confirm;
-    cout << "\t\t-CONFORMATION-\nAre You Sure? (Y/N): ";
-    cin >> confirm;
-    if (confirm == 'Y' || 'y')
-    {
-        query = "DELETE FROM DEPOSITACC WHERE ACCNO=?";
-        result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-        sqlite3_bind_int(stmt, 1, account_no);
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-
-        if (result == SQLITE_OK)
-        {
-            cout << "\n Data Deleted Successfully." << endl;
-        }
-        else
-        {
-            cout << "\nFailed: " << sqlite3_errmsg(db) << endl;
-        }
-    }
-    else
-    {
-        cout << "Deletion Operation Stopped." << endl;
-    }
-}
-
-double LoanAccount::generateEMI()
-{
-    double emi_amt, i;
-    i = getInterestRate();
-    i = i / (12 * 100);   // one month interest
-    period = period * 12; // one month period
-    emi_amt = (principle * i * pow(1 + i, period)) / (pow(1 + i, period) - 1);
-    return emi_amt;
-}
-
-string LoanAccount::findDueDate(string d)
-{
-    string due = "";
-    string yr = d.substr(7, 4);
-    int n;
-    string month[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-    string number_of_days[12] = {"31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"};
-    int year = stoi(yr);
-    cout << year;
-    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
-    {
-        number_of_days[1] = "29";
-    }
-    for (int m = 0; m < 12; m++)
-    {
-        if (d.substr(0, 3) == month[m])
-        {
-            n = m + 1;
-            if (m == 11)
-            {
-                n = 0;
-                yr = to_string(year + 1);
-            }
-            // if dec to jan => yr needs to change............
-            if (stoi(number_of_days[n]) < stoi(number_of_days[m]) && d.substr(4, 2) == number_of_days[m])
-            {
-                due = month[n] + ' ' + number_of_days[n] + ' ' + yr;
-            }
-            else
-            {
-                due = month[n] + d.substr(3, 4) + yr;
-            }
-            break;
-        }
-        else
-        {
-            continue;
-        }
-    }
-    return due;
-}
-string LoanAccount::getDateIssued(int account_no)
-{
-    string d;
-    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
-
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_no);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 3)));
-            return d;
-        }
-    }
-    return "";
-}
-string LoanAccount::getDueDate(int account_no)
-{
-    string d;
-    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
-
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_no);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-        return "";
-    }
-    else
-    {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 6)));
-            return d;
-        }
-    }
-}
-void LoanAccount::createNewLoan(Bank &obj)
-{
-    char x;
-    cout << "CIF Number:";
-    cin >> CIF;
-    if (obj.checkCIF(CIF) == 0)
-    {
-        cout << "The entered CIF number doesn't exist, please enter a valid CIF number!!" << endl;
-        return;
-    }
-    account_number = generateLoanAccountNumber();
-    cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
-    cin >> x;
-    if (x == 'G')
-    {
-        type = "GoldLoan";
-    }
-    else
-    {
-        type = "PropertyLoan";
-    }
-    date = __DATE__;
-    string s = "-";
-    string due_date;
-    int period;
-    cout << "Period:";
-    cin >> period;
-    cout << "Principle:";
-    cin >> principle;
-    emi = generateEMI();
-    due_date = findDueDate(__DATE__);
-    query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,EMI,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?,?,?,?,?);";
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_number);
-    sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
-    sqlite3_bind_int(stmt, 3, CIF);
-    sqlite3_bind_text(stmt, 4, date.c_str(), date.length(), SQLITE_TRANSIENT);
-    sqlite3_bind_double(stmt, 5, emi);
-    sqlite3_bind_int(stmt, 6, period);
-    sqlite3_bind_text(stmt, 7, due_date.c_str(), due_date.length(), SQLITE_TRANSIENT);
-    sqlite3_bind_text(stmt, 8, s.c_str(), s.length(), SQLITE_TRANSIENT);
-
-    sqlite3_step(stmt);
-    sqlite3_finalize(stmt);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "Error: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        cout << "Data Inserted Successfully." << endl;
-    }
-}
-int LoanAccount::getPeriod(int account_no)
-{
-    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
-
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_no);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            return sqlite3_column_int(stmt, 5);
-        }
-        cout << "Error. " << endl;
-    }
-}
-bool LoanAccount::isPeriodOver(int account_no)
-{
-    int period = getPeriod(account_no);
-    cout << period;
-    int d1, m1, y1, d2, m2, y2;
-    string date1, date2;
-    date1 = getDateIssued(account_no);
-    date2 = getDueDate(account_no);
-    string month[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-    int month_Days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-    y1 = stoi(date1.substr(7, 4));
-    y2 = stoi(date2.substr(7, 4));
-    for (int m = 0; m < 12; m++)
-    {
-        if (date1.substr(0, 3) == month[m])
-        {
-            m1 = m + 1;
-        }
-    }
-    for (int m = 0; m < 12; m++)
-    {
-        if (date2.substr(0, 3) == month[m])
-        {
-            m2 = m + 1;
-        }
-    }
-
-    if (m1 < m2 && y2 - y1 >= period)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-void LoanAccount::deleteLoanAccount(int account_no)
-{
-    query = "DELETE FROM LOANACC WHERE ACCNO=?";
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_no);
-    sqlite3_step(stmt);
-    sqlite3_finalize(stmt);
-
-    if (result == SQLITE_OK)
-    {
-        cout << "\n Data Deleted Successfully." << endl;
-    }
-    else
-    {
-        cout << "\nFailed: " << sqlite3_errmsg(db) << endl;
-    }
-}
-void LoanAccount::payMonthlyEMI()
-{
-    cout << "Account Number:";
-    cin >> account_number;
-    string due_date = findDueDate(getDueDate(account_number));
-    query = "UPDATE LOANACC SET DUEDATE = ? WHERE ACCNO = ?;";
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-
-    sqlite3_bind_text(stmt, 1, due_date.c_str(), due_date.length(), SQLITE_TRANSIENT);
-    sqlite3_bind_int(stmt, 2, account_number);
-
-    sqlite3_step(stmt);
-    sqlite3_finalize(stmt);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "FAILED: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        cout << "Amount debited Successfully." << endl;
-        if (isPeriodOver(account_number))
-        {
-            deleteLoanAccount(account_number);
-        }
-    }
-}
-void LoanAccount::getLoanType()
-{
-    cout << "Enter the account number to get the given account type : ";
-    cin >> account_number;
-    getchar();
-
-    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
-
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_number);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            cout << "your account type is: " << sqlite3_column_text(stmt, 1) << endl;
-            return;
-        }
-        cout << "The account with given account number does not exist " << endl;
-    }
-}
-void LoanAccount::getEMI()
-{
-    double depo_amt;
-    cout << "\n Type account to get total loan amount: \n";
-    cin >> account_number;
-    getchar();
-
-    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
-
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_number);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            cout << "your total loan amount is: " << sqlite3_column_double(stmt, 4) << endl;
-            return;
-        }
-        cout << "The account with given account number does not exist " << endl;
-    }
-}
-void LoanAccount::getTotalLoanAmt()
-{
-    double depo_amt;
-    cout << "\n Type account to get total loan amount: \n";
-    cin >> account_number;
-    getchar();
-
-    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
-
-    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
-    sqlite3_bind_int(stmt, 1, account_number);
-
-    if (result != SQLITE_OK)
-    {
-        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
-    }
-    else
-    {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            cout << "your total loan amount is: " << (period * 12) * (sqlite3_column_double(stmt, 4)) << endl;
-            return;
-        }
-        cout << "The account with given account number does not exist " << endl;
-    }
-}
-
-void Bank::newCustomer()
+ void Bank::newCustomer()
 {
     CIF = generateCIF();
     cout << "Enter the holder's name :";
@@ -1247,4 +655,525 @@ int Bank::checkCIF(int CIF)
         return 0;
     }
     return 0;
+}
+
+void DepositAccount::createAccount(Bank &obj)
+{
+    char x;
+    cout << "CIF Number:";
+    cin >> CIF;
+    if (obj.checkCIF(CIF) == 0)
+    {
+        cout << "The entered CIF number doesn't exist, please enter a valid CIF number!!" << endl;
+        windowChange();
+        createAccount(obj);
+        return;
+    }
+    account_number = generateAccountNumber();
+    cout << "\nSavings Account / Current Account :(S/C) ";
+    cin >> x;
+    if (x == 'S' || x == 's')
+    {
+        type = "SavingsAccount";
+    }
+    else
+    {
+        type = "CurrentAccount";
+    }
+    query = "INSERT INTO  DEPOSITACC(ACCNO, TYPE, CIF, BALANCE) VALUES(?,?,?,0);";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+    sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 3, CIF);
+
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    if (result != SQLITE_OK)
+    {
+        cout << "Error: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        cout << "Data Inserted Successfully." << endl;
+    }
+}
+
+void DepositAccount::depositMoney()
+{
+    double depo_amt;
+    cout << "\nType account no. to deposit money: \n";
+    cin >> account_number;
+    getchar();
+
+    cout << "Enter the amount to be deposited: \n";
+    cin >> depo_amt;
+
+    double pre_bal = getAmount(account_number);
+
+    query = "UPDATE DEPOSITACC SET BALANCE = ? WHERE ACCNO = ?;";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+
+    sqlite3_bind_double(stmt, 1, (depo_amt + pre_bal));
+    sqlite3_bind_int(stmt, 2, account_number);
+
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "FAILED: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        cout << "Amount deposited Successfully." << endl;
+        getAmount(account_number);
+    }
+}
+
+void DepositAccount::debitMoney()
+{
+    double debit_amt;
+    cout << "\n Type account no. to debit money: \n";
+    cin >> account_number;
+    getchar();
+
+    cout << "Enter the amount to be debited : \n";
+    cin >> debit_amt;
+
+    double pre_bal = getAmount(account_number);
+    if (pre_bal < debit_amt)
+    {
+        cout << "The balance in your account is less than the amount you need to debit !!" << endl;
+    }
+    else
+    {
+        query = "UPDATE DEPOSITACC SET BALANCE = ? WHERE ACCNO = ?;";
+        result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+
+        sqlite3_bind_double(stmt, 1, (pre_bal - debit_amt));
+        sqlite3_bind_int(stmt, 2, account_number);
+
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+
+        if (result != SQLITE_OK)
+        {
+            cout << "FAILED: " << sqlite3_errmsg(db) << endl;
+        }
+        else
+        {
+            cout << "Amount debited Successfully." << endl;
+            getAmount(account_number);
+        }
+    }
+}
+
+double DepositAccount::getAmount(int account_no)
+{
+    query = "SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_no);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            double r = sqlite3_column_double(stmt, 3);
+            cout << "The balance in your account is: " << r << endl;
+            return r;
+        }
+        cout << "The account with given account number does not exist " << endl;
+    }
+    return 0;
+}
+void DepositAccount::getAccountType()
+{
+    cout << "Enter the account number to get it's account type : ";
+    cin >> account_number;
+    getchar();
+
+    query = "SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            cout << "your account type is: " << sqlite3_column_text(stmt, 1) << endl;
+            return;
+        }
+        cout << "The account with given account number does not exist " << endl;
+    }
+}
+void DepositAccount::deleteDepositAccount(int account_no)
+{
+    char confirm;
+    cout << "\t\t-CONFORMATION-\nAre You Sure? (Y/N): ";
+    cin >> confirm;
+    if (confirm == 'Y' || 'y')
+    {
+        query = "DELETE FROM DEPOSITACC WHERE ACCNO=?";
+        result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+        sqlite3_bind_int(stmt, 1, account_no);
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+
+        if (result == SQLITE_OK)
+        {
+            cout << "\n Data Deleted Successfully." << endl;
+        }
+        else
+        {
+            cout << "\nFailed: " << sqlite3_errmsg(db) << endl;
+        }
+    }
+    else
+    {
+        cout << "Deletion Operation Stopped." << endl;
+    }
+}
+
+double LoanAccount::generateEMI()
+{
+    double emi_amt, i;
+    i = getInterestRate();
+    i = i / (12 * 100);   // one month interest
+    period = period * 12; // one month period
+    emi_amt = (principle * i * pow(1 + i, period)) / (pow(1 + i, period) - 1);
+    return emi_amt;
+}
+
+string LoanAccount::findDueDate(string d)
+{
+    string due = "";
+    string yr = d.substr(7, 4);
+    int n;
+    string month[12 ]	 = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    string number_of_days[12 ]	 = {"31", "28", "31", "30", "31", "30", "31", "31", "30", "31", "30", "31"};
+    int year = stoi(yr);
+    cout << year;
+    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+    {
+        number_of_days[1 ]	 = "29";
+    }
+    for (int m = 0; m < 12; m++)
+    {
+        if (d.substr(0, 3) == month[m ]	)
+        {
+            n = m + 1;
+            if (m == 11)
+            {
+                n = 0;
+                yr = to_string(year + 1);
+            }
+            // if dec to jan => yr needs to change............
+            if (stoi(number_of_days[n ]	) < stoi(number_of_days[m ]	) && d.substr(4, 2) == number_of_days[m ]	)
+            {
+                due = month[n ]	 + ' ' + number_of_days[n ]	 + ' ' + yr;
+            }
+            else
+            {
+                due = month[n ]	 + d.substr(3, 4) + yr;
+            }
+            break;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    return due;
+}
+string LoanAccount::getDateIssued(int account_no)
+{
+    string d;
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_no);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 3)));
+            return d;
+        }
+    }
+    return "";
+}
+string LoanAccount::getDueDate(int account_no)
+{
+    string d;
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_no);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+        return "";
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            d = string(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 6)));
+            return d;
+        }
+    }
+    return 0;
+}
+void LoanAccount::createNewLoan(Bank &obj)
+{
+    char x;
+    cout << "CIF Number:";
+    cin >> CIF;
+    if (obj.checkCIF(CIF) == 0)
+    {
+        cout << "The entered CIF number doesn't exist, please enter a valid CIF number!!" << endl;
+        return;
+    }
+    account_number = generateLoanAccountNumber();
+    cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
+    cin >> x;
+    if (x == 'G')
+    {
+        type = "GoldLoan";
+    }
+    else
+    {
+        type = "PropertyLoan";
+    }
+    date = __DATE__;
+    string s = "-";
+    string due_date;
+    int period;
+    cout << "Period:";
+    cin >> period;
+    cout << "Principle:";
+    cin >> principle;
+    emi = generateEMI();
+    due_date = findDueDate(__DATE__);
+    query = "INSERT INTO  LOANACC(ACCNO, TYPE, CIF,DATEISSUED,EMI,PERIOD,DUEDATE, TRANSACTIONS) VALUES(?,?,?,?,?,?,?,?);";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+    sqlite3_bind_text(stmt, 2, type.c_str(), type.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 3, CIF);
+    sqlite3_bind_text(stmt, 4, date.c_str(), date.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_double(stmt, 5, emi);
+    sqlite3_bind_int(stmt, 6, period);
+    sqlite3_bind_text(stmt, 7, due_date.c_str(), due_date.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 8, s.c_str(), s.length(), SQLITE_TRANSIENT);
+
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "Error: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        cout << "Data Inserted Successfully." << endl;
+    }
+}
+
+bool LoanAccount::isPeriodOver(int account_no)
+{
+    int period = getPeriod(account_no);
+    cout << period;
+    int d1, m1, y1, d2, m2, y2;
+    string date1, date2;
+    date1 = getDateIssued(account_no);
+    date2 = getDueDate(account_no);
+    string month[12 ]	 = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    int month_Days[12 ]	 = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    y1 = stoi(date1.substr(7, 4));
+    y2 = stoi(date2.substr(7, 4));
+    for (int m = 0; m < 12; m++)
+    {
+        if (date1.substr(0, 3) == month[m ]	)
+        {
+            m1 = m + 1;
+        }
+    }
+    for (int m = 0; m < 12; m++)
+    {
+        if (date2.substr(0, 3) == month[m ]	)
+        {
+            m2 = m + 1;
+        }
+    }
+
+    if (m1 < m2 && y2 - y1 >= period)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int LoanAccount::getPeriod(int account_no)
+{
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_no);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            return sqlite3_column_int(stmt, 5);
+        }
+        cout << "Error. " << endl;
+    }
+    return 0;
+}
+
+void LoanAccount::payMonthlyEMI()
+{
+    cout << "Account Number:";
+    cin >> account_number;
+    string due_date = findDueDate(getDueDate(account_number));
+    query = "UPDATE LOANACC SET DUEDATE = ? WHERE ACCNO = ?;";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+
+    sqlite3_bind_text(stmt, 1, due_date.c_str(), due_date.length(), SQLITE_TRANSIENT);
+    sqlite3_bind_int(stmt, 2, account_number);
+
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "FAILED: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        cout << "Amount debited Successfully." << endl;
+        if (isPeriodOver(account_number))
+        {
+            deleteLoanAccount(account_number);
+        }
+    }
+}
+void LoanAccount::getLoanType()
+{
+    cout << "Enter the account number to get the given account type : ";
+    cin >> account_number;
+    getchar();
+
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            cout << "your account type is: " << sqlite3_column_text(stmt, 1) << endl;
+            return;
+        }
+        cout << "The account with given account number does not exist " << endl;
+    }
+}
+void LoanAccount::getEMI()
+{
+    double depo_amt;
+    cout << "\n Type account to get total loan amount: \n";
+    cin >> account_number;
+    getchar();
+
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            cout << "your total loan amount is: " << sqlite3_column_double(stmt, 4) << endl;
+            return;
+        }
+        cout << "The account with given account number does not exist " << endl;
+    }
+}
+void LoanAccount::getTotalLoanAmt()
+{
+    double depo_amt;
+    cout << "\n Type account to get total loan amount: \n";
+    cin >> account_number;
+    getchar();
+
+    query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
+
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_number);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            cout << "your total loan amount is: " << (period * 12) * (sqlite3_column_double(stmt, 4)) << endl;
+            return;
+        }
+        cout << "The account with given account number does not exist " << endl;
+    }
+}
+
+void LoanAccount::deleteLoanAccount(int account_no)
+{
+    query = "DELETE FROM LOANACC WHERE ACCNO=?";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, account_no);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+
+    if (result == SQLITE_OK)
+    {
+        cout << "\n Data Deleted Successfully." << endl;
+    }
+    else
+    {
+        cout << "\nFailed: " << sqlite3_errmsg(db) << endl;
+    }
 }
