@@ -13,10 +13,67 @@ sqlite3 *db;
 sqlite3_stmt *stmt;
 int result;
 string query;
+class Initial
+{
+    public:
+    void connection1()
+{
+    if (sqlite3_open("bank.db", &db) == SQLITE_OK)
+    {
+        result = sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS DEPOSITACC(ACCNO INT, TYPE TEXT, CIF INT, BALANCE REAL);", -1, &stmt, NULL);
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
 
-void connection1();
-void connection2();
-void connection3();
+        if (result != SQLITE_OK)
+        {
+            cout << "Error: " << sqlite3_errmsg(db) << endl;
+        }
+        else
+        {
+            cout << "Data Inserted Successfully." << endl;
+        }
+    }
+}
+
+void connection2()
+{
+    if (sqlite3_open("bank.db", &db) == SQLITE_OK)
+    {
+        result = sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS CUSTOMERLIST(CIF INT, NAME TEXT, FATHERNAME TEXT, MOBILENO INT, ADDRESS TEXT);", -1, &stmt, NULL);
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+
+        if (result != SQLITE_OK)
+        {
+            cout << "Error: " << sqlite3_errmsg(db) << endl;
+        }
+        else
+        {
+            cout << "Data Inserted Successfully." << endl;
+        }
+    }
+}
+
+void connection3()
+{
+    if (sqlite3_open("bank.db", &db) == SQLITE_OK)
+    {
+        result = sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS LOANACC(ACCNO INT, TYPE TEXT, CIF INT, DATEISSUED TEXT, EMI REAL, PERIOD INT, DUEDATE TEXT, TRANSACTIONS TEXT);", -1, &stmt, NULL);
+        sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+
+        if (result != SQLITE_OK)
+        {
+            cout << "Error: " << sqlite3_errmsg(db) << endl;
+        }
+        else
+        {
+            cout << "Data Inserted Successfully." << endl;
+        }
+    }
+}
+
+};
 
 class Printer
 {
@@ -128,6 +185,7 @@ public:
 
     void deleteDepositAccount(int account_no);
 };
+
 class LoanAccount
 {
     int CIF;
@@ -177,13 +235,15 @@ public:
 
 int main()
 {
-    connection1();
-    DepositAccount obj_a;
+    Initial z;
     Printer p;
-    connection2();
+    DepositAccount obj_a;
     Bank obj_b;
-    connection3();
     LoanAccount obj_c;
+    z.connection1();
+    z.connection2();
+    z.connection3();
+    
     system("clear");
     cout.flush();
     sleep(2);
@@ -445,63 +505,6 @@ int main()
 
     sqlite3_close(db);
     return 0;
-}
-
-void connection1()
-{
-    if (sqlite3_open("bank.db", &db) == SQLITE_OK)
-    {
-        result = sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS DEPOSITACC(ACCNO INT, TYPE TEXT, CIF INT, BALANCE REAL);", -1, &stmt, NULL);
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-
-        if (result != SQLITE_OK)
-        {
-            cout << "Error: " << sqlite3_errmsg(db) << endl;
-        }
-        else
-        {
-            cout << "Data Inserted Successfully." << endl;
-        }
-    }
-}
-
-void connection2()
-{
-    if (sqlite3_open("bank.db", &db) == SQLITE_OK)
-    {
-        result = sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS CUSTOMERLIST(CIF INT, NAME TEXT, FATHERNAME TEXT, MOBILENO INT, ADDRESS TEXT);", -1, &stmt, NULL);
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-
-        if (result != SQLITE_OK)
-        {
-            cout << "Error: " << sqlite3_errmsg(db) << endl;
-        }
-        else
-        {
-            cout << "Data Inserted Successfully." << endl;
-        }
-    }
-}
-
-void connection3()
-{
-    if (sqlite3_open("bank.db", &db) == SQLITE_OK)
-    {
-        result = sqlite3_prepare_v2(db, "CREATE TABLE IF NOT EXISTS LOANACC(ACCNO INT, TYPE TEXT, CIF INT, DATEISSUED TEXT, EMI REAL, PERIOD INT, DUEDATE TEXT, TRANSACTIONS TEXT);", -1, &stmt, NULL);
-        sqlite3_step(stmt);
-        sqlite3_finalize(stmt);
-
-        if (result != SQLITE_OK)
-        {
-            cout << "Error: " << sqlite3_errmsg(db) << endl;
-        }
-        else
-        {
-            cout << "Data Inserted Successfully." << endl;
-        }
-    }
 }
 
 void DepositAccount::createAccount(Bank &obj)
