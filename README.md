@@ -1,7 +1,7 @@
 
 # SMS BANK <!-- omit in toc -->
 
-> BANK MANAGEMENT SYSTEM for organised Bank Servies in C++.
+> BANK MANAGEMENT SYSTEM for organised Bank Servies in C++
 
 
 ## List of Contents
@@ -49,7 +49,7 @@ This is a Bank Management System made for storing and organising the bank servic
 
 ## UML Diagram
 
-Five Classes are declared. The Printer Class is inherited to Bank Class, Loan Class and Deposit Class. The Bank Class is friend to Deposit Class and Loan Class.
+Five Classes are declared. The Printer Class is inherited to Bank Class, LoanAccount Class and DepositAccount Class.
 
 ![1](https://user-images.githubusercontent.com/98080072/206574985-302e9445-ab21-446f-bdd7-c8ef9ca06a1d.png)
 
@@ -84,5 +84,15 @@ g++ main.cpp -l sqlite3
 ## Sample Database
 
 
-sample database..
+- Customer Table:
+  
+  ![Screenshot from 2022-12-09 03-17-13](https://user-images.githubusercontent.com/107610309/206575274-a5de3047-1fe1-4a70-8e7f-207adcfdbefb.png)
+
+- Deposits Table:
+  
+  ![Screenshot from 2022-12-09 03-17-20](https://user-images.githubusercontent.com/107610309/206575355-d24aba84-741f-413f-b2af-895d440d588f.png)
+
+- Loans Table:
+  
+  ![Screenshot from 2022-12-09 03-15-25](https://user-images.githubusercontent.com/107610309/206575426-6281e1e7-d3f8-4cc7-804d-27fdaa71e277.png)
 
