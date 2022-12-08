@@ -30,7 +30,6 @@ class Printer
 {
 };
 
-
 class Bank
 {
     string name, father_name, address;
@@ -52,9 +51,8 @@ public:
     void loanAccountsDue(); //*
     void customerList();
     int checkCIF(int);
-    friend class DepositAccount ;
+    friend class DepositAccount;
     friend class LoanAccount;
-
 };
 
 class DepositAccount
@@ -78,7 +76,6 @@ public:
     double getAmount(int);
     void getHolderName();
     void getAccountType();
-
 
     void deleteDepositAccount(int account_no);
 };
@@ -119,7 +116,7 @@ public:
     string findDueDate(string a); // done
     string getDateIssued(int account_no);
     string getDueDate(int account_no); // done
-    void createNewLoan(Bank &);              // done
+    void createNewLoan(Bank &);        // done
     bool isPeriodOver(int);
     int getPeriod(int);
     void payMonthlyEMI();   // done
@@ -129,7 +126,6 @@ public:
     void deleteLoanAccount(int);
 };
 
-
 int main()
 {
     connection1();
@@ -138,299 +134,299 @@ int main()
     Bank obj_b;
     connection3();
     LoanAccount obj_c;
+    system("clear");
+    cout.flush();
+    sleep(2);
+    header();
+    int menu;
+    cout << "-------------------------------------------------------------------------------------------------" << endl;
+    cout << "Press [1] to enter into deposits section \n";
+    cout << "Press [2] to enter into loans section \n";
+    cout << "Press [3] to get accounts of given CIF \n";
+    cout << "Press [4] to get given CIF details \n";
+    cout << "Press [5] to get deposit list \n";
+    cout << "Press [6] to get loans list \n";
+    cout << "Press [7] to get customer list \n";
+    cout << "Press [8] if you were a new customer to the bank \n";
+    cout << "Press [9] to exit from bank \n";
+    cout << "-------------------------------------------------------------------------------------------------" << endl;
+    cin >> menu;
+    getchar();
+
+    switch (menu)
+    {
+    case 1:
+    {
         system("clear");
         cout.flush();
         sleep(2);
         header();
-         int menu;
+        char choice1;
         cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cout << "Press [1] to enter into deposits section \n";
-        cout << "Press [2] to enter into loans section \n";
-        cout << "Press [3] to get accounts of given CIF \n";
-        cout << "Press [4] to get given CIF details \n";
-        cout << "Press [5] to get deposit list \n";
-        cout << "Press [6] to get loans list \n";
-        cout << "Press [7] to get customer list \n";
-        cout << "Press [8] if you were a new customer to the bank \n";
-        cout << "Press [9] to exit from bank \n";
+        cout << "Press [a] to create account \n";
+        cout << "Press [b] to deposit money \n";
+        cout << "Press [c] to debit money \n";
+        cout << "Press [d] to get account type \n";
+        cout << "Press [e] to fetch balance \n";
+        cout << "Press [f] to exit from deposits section \n";
         cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cin >> menu;
+        cin >> choice1;
         getchar();
 
-        switch (menu)
+        switch (choice1)
         {
-        case 1:
+        case 'a':
         {
-                 system("clear");
-        cout.flush();
-        sleep(2);
-        header();
-                char choice1;
-                cout << "-------------------------------------------------------------------------------------------------" << endl;
-                cout << "Press [a] to create account \n";
-                cout << "Press [b] to deposit money \n";
-                cout << "Press [c] to debit money \n";
-                cout << "Press [d] to get account type \n";
-                cout << "Press [e] to fetch balance \n";
-                cout << "Press [f] to exit from deposits section \n";
-                cout << "-------------------------------------------------------------------------------------------------" << endl;
-                cin >> choice1;
-                getchar();
-
-                switch (choice1)
-                {
-                case 'a':
-                {
-                        system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    obj_a.createAccount(obj_b);
-                    break;
-                }
-                case 'b':
-                {
-                          system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    obj_a.depositMoney();
-                    break;
-                }
-                case 'c':
-                {
-                          system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    obj_a.debitMoney();
-                    break;
-                }
-                case 'd':
-                {
-                          system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    obj_a.getAccountType();
-                    break;
-                }
-                case 'e':
-                {
-                         system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                        int acc;
-                    cout << "Enter the account number : ";
-                    cin >> acc;
-                    obj_a.getAmount(acc);
-                    break;
-                }
-                case 'f':
-                {
-                         system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    cout << "Successfully exited from deposits section." << endl;
-                    break;
-                }
-                default:
-                {
-                         system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    cout << "!!Please press the valid key!!" << endl;
-                    break;
-                }
-                }
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_a.createAccount(obj_b);
             break;
         }
-        case 2:
+        case 'b':
         {
-                  system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                char choice2;
-                cout << "-------------------------------------------------------------------------------------------------" << endl;
-                cout << "Press [a] to create new loan \n";
-                cout << "Press [b] to generate EMI \n";
-                cout << "Press [c] to get due date \n";
-                cout << "Press [d] to pay monthly EMI \n";
-                cout << "Press [e] to get loan type \n";
-                cout << "Press [f] to get EMI \n";
-                cout << "Press [g] to get total loan amount \n";
-                cout << "Press [h] to exit from loans section \n";
-                cout << "-------------------------------------------------------------------------------------------------" << endl;
-                cin >> choice2;
-                getchar();
-
-                switch (choice2)
-                {
-                case 'a':
-                {
-                      system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                 obj_c.createNewLoan(obj_b);
-                    break;
-                }
-                case 'b':
-                {
-                         system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    obj_c.generateEMI();
-                    break;
-                }
-                case 'c':
-                {
-                           system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    int acc;
-                    cout << "Enter the account number : ";
-                    cin >> acc;
-                    obj_c.getDueDate(acc);
-                    break;
-                }
-                case 'd':
-                {
-                           system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    obj_c.payMonthlyEMI();
-                    break;
-                }
-                case 'e':
-                {
-                         system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    obj_c.getLoanType();
-                    break;
-                }
-                case 'f':
-                {
-                         system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    obj_c.getEMI();
-                    break;
-                }
-                case 'g':
-                {
-                          system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    obj_c.getTotalLoanAmt();
-                    break;
-                }
-                case 'h':
-                {
-                         system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    cout << "Successfully exited from loans section." << endl;
-                    break;
-                }
-                default:
-                {
-                          system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-                    cout << "!!Please press the valid key!!" << endl;
-                    break;
-                }
-              }
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_a.depositMoney();
             break;
         }
-        case 3:
+        case 'c':
         {
-               system("clear");
-                        cout.flush();
-                        sleep(2);
-                        header();
-            obj_b.searchFromCIF();
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_a.debitMoney();
             break;
         }
-        case 4:
+        case 'd':
         {
-              system("clear");
-              cout.flush();
-              sleep(2);
-              header();
-            obj_b.searchAboutCIF();
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_a.getAccountType();
             break;
         }
-        case 5:
+        case 'e':
         {
-              system("clear");
-              cout.flush();
-              sleep(2);
-              header();
-            obj_b.depositAccounts();
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            int acc;
+            cout << "Enter the account number : ";
+            cin >> acc;
+            obj_a.getAmount(acc);
             break;
         }
-        case 6:
+        case 'f':
         {
-              system("clear");
-              cout.flush();
-              sleep(2);
-              header();
-            obj_b.loanAccounts();
-            break;
-        }
-        case 7:
-        {
-               system("clear");
-              cout.flush();
-              sleep(2);
-              header();
-            obj_b.customerList();
-            break;
-        }
-        case 8:
-        {
-               system("clear");
-              cout.flush();
-              sleep(2);
-              header();
-            obj_b.newCustomer();
-            break;
-        }
-        case 9:
-        {
-               system("clear");
-              cout.flush();
-              sleep(2);
-              header();
-            cout << "Successfully exited from bank." << endl;
-            exit(1);
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            cout << "Successfully exited from deposits section." << endl;
             break;
         }
         default:
         {
-              system("clear");
-              cout.flush();
-              sleep(2);
-              header();
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
             cout << "!!Please press the valid key!!" << endl;
             break;
         }
         }
+        break;
+    }
+    case 2:
+    {
+        system("clear");
+        cout.flush();
+        sleep(2);
+        header();
+        char choice2;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cout << "Press [a] to create new loan \n";
+        cout << "Press [b] to generate EMI \n";
+        cout << "Press [c] to get due date \n";
+        cout << "Press [d] to pay monthly EMI \n";
+        cout << "Press [e] to get loan type \n";
+        cout << "Press [f] to get EMI \n";
+        cout << "Press [g] to get total loan amount \n";
+        cout << "Press [h] to exit from loans section \n";
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cin >> choice2;
+        getchar();
+
+        switch (choice2)
+        {
+        case 'a':
+        {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_c.createNewLoan(obj_b);
+            break;
+        }
+        case 'b':
+        {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_c.generateEMI();
+            break;
+        }
+        case 'c':
+        {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            int acc;
+            cout << "Enter the account number : ";
+            cin >> acc;
+            obj_c.getDueDate(acc);
+            break;
+        }
+        case 'd':
+        {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_c.payMonthlyEMI();
+            break;
+        }
+        case 'e':
+        {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_c.getLoanType();
+            break;
+        }
+        case 'f':
+        {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_c.getEMI();
+            break;
+        }
+        case 'g':
+        {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            obj_c.getTotalLoanAmt();
+            break;
+        }
+        case 'h':
+        {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            cout << "Successfully exited from loans section." << endl;
+            break;
+        }
+        default:
+        {
+            system("clear");
+            cout.flush();
+            sleep(2);
+            header();
+            cout << "!!Please press the valid key!!" << endl;
+            break;
+        }
+        }
+        break;
+    }
+    case 3:
+    {
+        system("clear");
+        cout.flush();
+        sleep(2);
+        header();
+        obj_b.searchFromCIF();
+        break;
+    }
+    case 4:
+    {
+        system("clear");
+        cout.flush();
+        sleep(2);
+        header();
+        obj_b.searchAboutCIF();
+        break;
+    }
+    case 5:
+    {
+        system("clear");
+        cout.flush();
+        sleep(2);
+        header();
+        obj_b.depositAccounts();
+        break;
+    }
+    case 6:
+    {
+        system("clear");
+        cout.flush();
+        sleep(2);
+        header();
+        obj_b.loanAccounts();
+        break;
+    }
+    case 7:
+    {
+        system("clear");
+        cout.flush();
+        sleep(2);
+        header();
+        obj_b.customerList();
+        break;
+    }
+    case 8:
+    {
+        system("clear");
+        cout.flush();
+        sleep(2);
+        header();
+        obj_b.newCustomer();
+        break;
+    }
+    case 9:
+    {
+        system("clear");
+        cout.flush();
+        sleep(2);
+        header();
+        cout << "Successfully exited from bank." << endl;
+        exit(1);
+        break;
+    }
+    default:
+    {
+        system("clear");
+        cout.flush();
+        sleep(2);
+        header();
+        cout << "!!Please press the valid key!!" << endl;
+        break;
+    }
+    }
     sqlite3_close(db);
     return 0;
 }
@@ -497,10 +493,10 @@ void DepositAccount::createAccount(Bank &obj)
     char x;
     cout << "CIF Number:";
     cin >> CIF;
-     if(obj.checkCIF(CIF) == 0)
+    if (obj.checkCIF(CIF) == 0)
     {
-        cout<<"The entered CIF number doesn't exist, please enter a valid CIF number!!"<<endl;
-          return;
+        cout << "The entered CIF number doesn't exist, please enter a valid CIF number!!" << endl;
+        return;
     }
     account_number = generateAccountNumber();
     cout << "\nSavings Account / Current Account :(S/C) ";
@@ -778,10 +774,10 @@ void LoanAccount::createNewLoan(Bank &obj)
     char x;
     cout << "CIF Number:";
     cin >> CIF;
-    if(obj.checkCIF(CIF) == 0)
+    if (obj.checkCIF(CIF) == 0)
     {
-        cout<<"The entered CIF number doesn't exist, please enter a valid CIF number!!"<<endl;
-          return ;
+        cout << "The entered CIF number doesn't exist, please enter a valid CIF number!!" << endl;
+        return;
     }
     account_number = generateLoanAccountNumber();
     cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
@@ -1228,9 +1224,9 @@ int Bank::checkCIF(int CIF)
     {
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
-             return 1;
+            return 1;
         }
-          return 0;
+        return 0;
     }
     return 0;
 }
