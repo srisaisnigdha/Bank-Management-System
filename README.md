@@ -1,7 +1,9 @@
 
 <p align="center">
-  <img width="600" height="200" src=(https://user-images.githubusercontent.com/107610309/206561163-b978bdfe-214a-4f00-be47-4efa13af9eef.jpeg)>
+  <img width="600" height="200" src=![SMS_logo1](https://user-images.githubusercontent.com/107610309/206563786-721bb7ab-0265-4fd0-b4ef-77b79f1e599f.jpeg)
+>
 </p>
+
 # SMS BANK <!-- omit in toc -->
 
 > BANK MANAGEMENT SYSTEM for organised Bank Servies in C++.
@@ -10,13 +12,12 @@
 - [Team Members](#team-members)
 - [Introduction](#introduction)
 - [Features](#features)
+- [Details](#details)
 - [UML Diagram](#uml-diagram)
 - [How To Run](#how-to-run)
 - [Sample Input](#sample-input)
 - [Sample Output](#sample-output)
 - [Sample Database](#sample-database)
-- [What We Learnt](#what-we-learnt)
-- [What's Next For SMS Bank](whats-next-for-sms-bank)
 
 ## Team Members
 
@@ -33,9 +34,21 @@ This is a Bank Management System made for storing and organising the bank servic
 
 ## Features
 
+- Each Customer gets a unique CIF Number.
+- Deposit Account can be created and managed.
+- Loan Account can be created and managed.
+- The Accounts of a person in the Bank can be fetched.
+- The Customer Details of a person can be fetched.
+- The Customer List containing the Customer Details in a Bank can be accessed.
+- The Deposits List containing the Deposit Accounts in a Bank can be accessed.
+- The Loans List containing the Loan Accounts in a Bank can be accessed.
+
+## Details
+
+
 - The basic concepts of Object-Oriented Programming are used.
 
-- The Data is stored & manipulated with the help of sqlite library.
+- The Data is stored & manipulated inside DataBase with the help of sqlite library.
 
   - sqlite : SQLite is an in-process library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine.
 
@@ -46,7 +59,7 @@ uml diagram..
 
 ## How To Run
 
-Enter the following commnd to compile the main file.
+Enter the following command to compile the main.cpp file.
 
 
 ```a
@@ -68,9 +81,3 @@ sample output..
 
 sample database..
 
-## What We Learnt
-
-
-- 
-
-## What's Next For SMS Bank
