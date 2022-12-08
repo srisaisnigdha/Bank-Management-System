@@ -1,7 +1,7 @@
 
 # SMS BANK <!-- omit in toc -->
 
-> BANK MANAGEMENT SYSTEM for organised Bank Servies in C++.
+> BANK MANAGEMENT SYSTEM for organised Bank Servies in C++
 
 
 ## List of Contents
