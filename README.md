@@ -1,22 +1,17 @@
 
-<p align="center">
-  <img width="600" height="200" src=![SMS_logo1](https://user-images.githubusercontent.com/107610309/206563786-721bb7ab-0265-4fd0-b4ef-77b79f1e599f.jpeg)
->
-</p>
-
 # SMS BANK <!-- omit in toc -->
 
 > BANK MANAGEMENT SYSTEM for organised Bank Servies in C++.
 
-## List of Contents \-
+
+## List of Contents
 - [Team Members](#team-members)
 - [Introduction](#introduction)
 - [Features](#features)
 - [Details](#details)
 - [UML Diagram](#uml-diagram)
 - [How To Run](#how-to-run)
-- [Sample Input](#sample-input)
-- [Sample Output](#sample-output)
+- [Sample Input-Output](#sample-input-output)
 - [Sample Database](#sample-database)
 
 ## Team Members
@@ -54,8 +49,9 @@ This is a Bank Management System made for storing and organising the bank servic
 
 ## UML Diagram
 
+Five Classes are declared. The Printer Class is inherited to Bank Class, Loan Class and Deposit Class. The Bank Class is friend to Deposit Class and Loan Class.
 
-uml diagram..
+
 
 ## How To Run
 
@@ -66,15 +62,21 @@ Enter the following command to compile the main.cpp file.
 g++ main.cpp -l sqlite3
 
 ```
-## Sample Input
+## Sample Input-Output
+
+- Main Menu:
+  
+  ![6](https://user-images.githubusercontent.com/107610309/206569382-73350af6-47e3-42e5-b8be-f4ae7556b080.png)
+
+- Deposits Menu:
+  
+  ![5](https://user-images.githubusercontent.com/107610309/206570095-f8fac859-c801-4b86-8b92-cefb8d5be5a2.png)
+  
+- Loans Menu:
+  
+  ![4](https://user-images.githubusercontent.com/107610309/206570301-9ee15796-a94a-4333-bc7c-9e3634e2da65.png)
 
 
-sample input..
-
-## Sample Output
-
-
-sample output..
 
 ## Sample Database
 
