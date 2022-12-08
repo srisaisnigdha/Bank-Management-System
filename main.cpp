@@ -30,6 +30,33 @@ class Printer
 {
 };
 
+
+class Bank
+{
+    string name, father_name, address;
+    long long int mobile_no;
+    int generateCIF()
+    {
+        srand((unsigned)time(NULL));
+        CIF = 100 + (rand() % 900);
+        return CIF;
+    }
+
+public:
+    int CIF;
+    void newCustomer(); // GENERATE CIF()
+    void searchAboutCIF();
+    void searchFromCIF();   // acc num,acc type where cif=?
+    void depositAccounts(); // acc num,acc tyPE,cif,balance
+    void loanAccounts();    // acc num, acc type,cif,emi
+    void loanAccountsDue(); //*
+    void customerList();
+    int checkCIF(int);
+    friend class DepositAccount ;
+    friend class LoanAccount;
+
+};
+
 class DepositAccount
 {
     int CIF;
@@ -44,13 +71,13 @@ class DepositAccount
 
 public:
     int account_number;
-    void createAccount();
-    void depositMoney();     
-    void debitMoney();       
-    void showTransactions(); 
-    double getAmount(int);   
-    void getHolderName();    
-    void getAccountType();   
+    void createAccount(Bank &);
+    void depositMoney();
+    void debitMoney();
+    void showTransactions();
+    double getAmount(int);
+    void getHolderName();
+    void getAccountType();
 
 
     void deleteDepositAccount(int account_no);
@@ -92,7 +119,7 @@ public:
     string findDueDate(string a); // done
     string getDateIssued(int account_no);
     string getDueDate(int account_no); // done
-    void createNewLoan();              // done
+    void createNewLoan(Bank &);              // done
     bool isPeriodOver(int);
     int getPeriod(int);
     void payMonthlyEMI();   // done
@@ -102,27 +129,6 @@ public:
     void deleteLoanAccount(int);
 };
 
-class Bank
-{
-    string name, father_name, address;
-    long long int mobile_no;
-    int generateCIF()
-    {
-        srand((unsigned)time(NULL));
-        CIF = 100 + (rand() % 900);
-        return CIF;
-    }
-
-public:
-    int CIF;
-    void newCustomer(); // GENERATE CIF()
-    void searchAboutCIF();
-    void searchFromCIF();   // acc num,acc type where cif=?
-    void depositAccounts(); // acc num,acc tyPE,cif,balance
-    void loanAccounts();    // acc num, acc type,cif,emi
-    void loanAccountsDue(); //*
-    void customerList();
-};
 
 int main()
 {
@@ -179,7 +185,7 @@ int main()
                         cout.flush();
                         sleep(2);
                         header();
-                    obj_a.createAccount();
+                    obj_a.createAccount(obj_b);
                     break;
                 }
                 case 'b':
@@ -270,7 +276,7 @@ int main()
                         cout.flush();
                         sleep(2);
                         header();
-                 obj_c.createNewLoan();
+                 obj_c.createNewLoan(obj_b);
                     break;
                 }
                 case 'b':
@@ -425,31 +431,6 @@ int main()
             break;
         }
         }
-    // header();
-    // connection1();
-    // DepositAccount a;
-    // connection2();
-    // Bank b;
-    // connection3();
-    // LoanAccount c;
-    //  b.newCustomer();
-    //  a.createAccount();
-    //  c.createNewLoan();
-    //  b.searchAboutCIF();
-    //  b.searchFromCIF();
-    //  b.depositAccounts();
-    // b.loanAccounts();
-    //  a.depositMoney();
-    //  a.debitMoney();
-    //  a.getAccountType();
-    //  int acc = 4000;
-    //  a.getAmount(acc);
-    //  LoanAccount c;
-    //  c.createNewLoan();
-    //  c.getLoanType();
-    //  c.getEMI();
-    //  c.getTotalLoanAmt();
-    //  c.payMonthlyEMI();
     sqlite3_close(db);
     return 0;
 }
@@ -511,11 +492,16 @@ void connection3()
     }
 }
 
-void DepositAccount::createAccount()
+void DepositAccount::createAccount(Bank &obj)
 {
     char x;
     cout << "CIF Number:";
     cin >> CIF;
+     if(obj.checkCIF(CIF) == 0)
+    {
+        cout<<"The entered CIF number doesn't exist, please enter a valid CIF number!!"<<endl;
+          return;
+    }
     account_number = generateAccountNumber();
     cout << "\nSavings Account / Current Account :(S/C) ";
     cin >> x;
@@ -787,11 +773,16 @@ string LoanAccount::getDueDate(int account_no)
         }
     }
 }
-void LoanAccount::createNewLoan()
+void LoanAccount::createNewLoan(Bank &obj)
 {
     char x;
     cout << "CIF Number:";
     cin >> CIF;
+    if(obj.checkCIF(CIF) == 0)
+    {
+        cout<<"The entered CIF number doesn't exist, please enter a valid CIF number!!"<<endl;
+          return ;
+    }
     account_number = generateLoanAccountNumber();
     cout << "\nGoldLoan /  PropertyLoan:(G/P) ";
     cin >> x;
@@ -1222,4 +1213,24 @@ void Bank::customerList()
         }
         cout << "-------------------------------------------------------------------------------------------------" << endl;
     }
+}
+int Bank::checkCIF(int CIF)
+{
+    query = "SELECT * FROM CUSTOMERLIST WHERE CIF = ?;";
+    result = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, NULL);
+    sqlite3_bind_int(stmt, 1, CIF);
+
+    if (result != SQLITE_OK)
+    {
+        cout << "ERROR: " << sqlite3_errmsg(db) << endl;
+    }
+    else
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+             return 1;
+        }
+          return 0;
+    }
+    return 0;
 }
