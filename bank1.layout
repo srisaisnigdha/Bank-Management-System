@@ -1,42 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
-	<ActiveTarget name="Release" />
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<ActiveTarget name="Debug" />
+	<File name="main.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-			<Cursor1 position="2729" topLine="0" />
+			<Cursor1 position="10594" topLine="355" />
 		</Cursor>
-		<Folding>
-			<Collapse line="24" />
-			<Collapse line="28" />
-			<Collapse line="51" />
-			<Collapse line="167" />
-			<Collapse line="202" />
-			<Collapse line="234" />
-			<Collapse line="272" />
-			<Collapse line="295" />
-			<Collapse line="320" />
-			<Collapse line="329" />
-			<Collapse line="353" />
-			<Collapse line="373" />
-			<Collapse line="420" />
-			<Collapse line="443" />
-			<Collapse line="468" />
-			<Collapse line="494" />
-			<Collapse line="521" />
-			<Collapse line="556" />
-			<Collapse line="592" />
-			<Collapse line="644" />
-		</Folding>
-=======
-			<Cursor1 position="3550" topLine="135" />
-		</Cursor>
->>>>>>> Stashed changes
-=======
-			<Cursor1 position="3550" topLine="135" />
-		</Cursor>
->>>>>>> Stashed changes
 	</File>
 </CodeBlocks_layout_file>

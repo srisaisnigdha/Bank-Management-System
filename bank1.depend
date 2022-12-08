@@ -9,11 +9,9 @@
 1669651552 c:\users\sri sai snigdha\desktop\bank1\sqlite3.h
 	<stdarg.h>
 
-<<<<<<< Updated upstream
-1669947405 source:c:\users\srini\onedrive\documents\github\bank-d\main.cpp
-=======
+
 1669946719 source:c:\users\srini\onedrive\documents\github\bank-d\main.cpp
->>>>>>> Stashed changes
+
 	<bits/stdc++.h>
 	"sqlite3.h"
 	<Windows.h>

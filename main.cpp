@@ -8,14 +8,6 @@
 #include <cstdlib>
 using namespace std;
 void connection();
-sqlite3 *db;
-sqlite3_stmt *stmt;
-int result;
-string query;
-
-void connection1();
-void connection2();
-void connection3();
 
 void header()
 {
@@ -24,6 +16,15 @@ void header()
     cout << "   -------------------------------------------------------------------------------------------------------------------------------------------------------\n"
          << endl;
 }
+
+sqlite3 *db;
+sqlite3_stmt *stmt;
+int result;
+string query;
+
+void connection1();
+void connection2();
+void connection3();
 
 class Printer
 {
@@ -50,6 +51,8 @@ public:
     double getAmount(int);   
     void getHolderName();    
     void getAccountType();   
+
+
     void deleteDepositAccount(int account_no);
 };
 class LoanAccount
