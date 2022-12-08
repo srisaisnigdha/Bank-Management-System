@@ -7,7 +7,6 @@
 #endif
 #include <cstdlib>
 using namespace std;
-void connection();
 
 sqlite3 *db;
 sqlite3_stmt *stmt;
@@ -85,7 +84,7 @@ class Printer
     char menuForChoice2();
 };
 
-class Bank
+class Bank: public Printer
 {
     string name, father_name, address;
     long long int mobile_no;
@@ -109,7 +108,7 @@ public:
     friend class LoanAccount;
 };
 
-class DepositAccount
+class DepositAccount: Printer
 {
     int CIF;
     double amount;
@@ -131,7 +130,7 @@ public:
     void deleteDepositAccount(int account_no);
 };
 
-class LoanAccount
+class LoanAccount: public Printer
 {
     int CIF;
     string date, duedate;
@@ -185,6 +184,7 @@ int main()
     DepositAccount obj_a;
     Bank obj_b;
     LoanAccount obj_c;
+
     z.connection1();
     z.connection2();
     z.connection3();
@@ -203,7 +203,7 @@ int main()
         {
         case 'a':
         {
-              p.windowChange();
+            p.windowChange();
             obj_a.createAccount(obj_b);
             break;
         }
