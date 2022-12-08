@@ -9,14 +9,6 @@
 using namespace std;
 void connection();
 
-void header()
-{
-    cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
-    cout << "\t\t\t\t\t\t<><><><><><><><><><><><><  SMS BANK  ><><><><><><><><><><><><><>\t\t\t\t\t" << endl;
-    cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------\n"
-         << endl;
-}
-
 sqlite3 *db;
 sqlite3_stmt *stmt;
 int result;
@@ -28,6 +20,63 @@ void connection3();
 
 class Printer
 {
+public:
+    void header()
+    {
+        cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
+        cout << "\t\t\t\t\t\t<><><><><><><><><><><><><  SMS BANK  ><><><><><><><><><><><><><>\t\t\t\t\t" << endl;
+        cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------\n"
+             << endl;
+    }
+    int menu()
+    {
+        int option;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cout << "Press [1] to enter into deposits section \n";
+        cout << "Press [2] to enter into loans section \n";
+        cout << "Press [3] to get accounts of given CIF \n";
+        cout << "Press [4] to get given CIF details \n";
+        cout << "Press [5] to get deposit list \n";
+        cout << "Press [6] to get loans list \n";
+        cout << "Press [7] to get customer list \n";
+        cout << "Press [8] if you were a new customer to the bank \n";
+        cout << "Press [9] to exit from bank \n";
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cin >> option;
+        getchar();
+        return option;
+    }
+    int menuForChoice1()
+    {
+        int choice;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cout << "Press [a] to create account \n";
+        cout << "Press [b] to deposit money \n";
+        cout << "Press [c] to debit money \n";
+        cout << "Press [d] to get account type \n";
+        cout << "Press [e] to fetch balance \n";
+        cout << "Press [f] to exit from deposits section \n";
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cin >> choice;
+        getchar();
+    }
+    char menuForChoice2()
+    {
+        char choice;
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cout << "Press [a] to create new loan \n";
+        cout << "Press [b] to generate EMI \n";
+        cout << "Press [c] to get due date \n";
+        cout << "Press [d] to pay monthly EMI \n";
+        cout << "Press [e] to get loan type \n";
+        cout << "Press [f] to get EMI \n";
+        cout << "Press [g] to get total loan amount \n";
+        cout << "Press [h] to exit from loans section \n";
+        cout << "-------------------------------------------------------------------------------------------------" << endl;
+        cin >> choice;
+        getchar();
+        return choice;
+    }
 };
 
 class Bank
@@ -43,11 +92,11 @@ class Bank
 
 public:
     int CIF;
-    void newCustomer(); // GENERATE CIF()
+    void newCustomer();
     void searchAboutCIF();
-    void searchFromCIF();   // acc num,acc type where cif=?
-    void depositAccounts(); // acc num,acc tyPE,cif,balance
-    void loanAccounts();    // acc num, acc type,cif,emi
+    void searchFromCIF();
+    void depositAccounts();
+    void loanAccounts();
     void loanAccountsDue(); //*
     void customerList();
     int checkCIF(int);
@@ -72,9 +121,9 @@ public:
     void createAccount(Bank &);
     void depositMoney();
     void debitMoney();
-    void showTransactions();
+    void showTransactions(); //*
     double getAmount(int);
-    void getHolderName();
+    void getHolderName(); //*
     void getAccountType();
 
     void deleteDepositAccount(int account_no);
@@ -112,17 +161,17 @@ class LoanAccount
     }
 
 public:
-    double generateEMI();         // done
-    string findDueDate(string a); // done
+    double generateEMI();
+    string findDueDate(string a);
     string getDateIssued(int account_no);
-    string getDueDate(int account_no); // done
-    void createNewLoan(Bank &);        // done
+    string getDueDate(int account_no);
+    void createNewLoan(Bank &);
     bool isPeriodOver(int);
     int getPeriod(int);
-    void payMonthlyEMI();   // done
-    void getLoanType();     // done
-    void getEMI();          // done
-    void getTotalLoanAmt(); // done
+    void payMonthlyEMI();
+    void getLoanType();
+    void getEMI();
+    void getTotalLoanAmt();
     void deleteLoanAccount(int);
 };
 
@@ -130,6 +179,7 @@ int main()
 {
     connection1();
     DepositAccount obj_a;
+    Printer p;
     connection2();
     Bank obj_b;
     connection3();
@@ -137,41 +187,18 @@ int main()
     system("clear");
     cout.flush();
     sleep(2);
-    header();
-    int menu;
-    cout << "-------------------------------------------------------------------------------------------------" << endl;
-    cout << "Press [1] to enter into deposits section \n";
-    cout << "Press [2] to enter into loans section \n";
-    cout << "Press [3] to get accounts of given CIF \n";
-    cout << "Press [4] to get given CIF details \n";
-    cout << "Press [5] to get deposit list \n";
-    cout << "Press [6] to get loans list \n";
-    cout << "Press [7] to get customer list \n";
-    cout << "Press [8] if you were a new customer to the bank \n";
-    cout << "Press [9] to exit from bank \n";
-    cout << "-------------------------------------------------------------------------------------------------" << endl;
-    cin >> menu;
-    getchar();
+    p.header();
+    int option = p.menu();
 
-    switch (menu)
+    switch (option)
     {
     case 1:
     {
         system("clear");
         cout.flush();
         sleep(2);
-        header();
-        char choice1;
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cout << "Press [a] to create account \n";
-        cout << "Press [b] to deposit money \n";
-        cout << "Press [c] to debit money \n";
-        cout << "Press [d] to get account type \n";
-        cout << "Press [e] to fetch balance \n";
-        cout << "Press [f] to exit from deposits section \n";
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cin >> choice1;
-        getchar();
+        p.header();
+        char choice1 = p.menuForChoice1();
 
         switch (choice1)
         {
@@ -180,7 +207,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_a.createAccount(obj_b);
             break;
         }
@@ -189,7 +216,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_a.depositMoney();
             break;
         }
@@ -198,7 +225,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_a.debitMoney();
             break;
         }
@@ -207,7 +234,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_a.getAccountType();
             break;
         }
@@ -216,7 +243,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             int acc;
             cout << "Enter the account number : ";
             cin >> acc;
@@ -228,7 +255,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             cout << "Successfully exited from deposits section." << endl;
             break;
         }
@@ -237,7 +264,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             cout << "!!Please press the valid key!!" << endl;
             break;
         }
@@ -249,21 +276,9 @@ int main()
         system("clear");
         cout.flush();
         sleep(2);
-        header();
-        char choice2;
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cout << "Press [a] to create new loan \n";
-        cout << "Press [b] to generate EMI \n";
-        cout << "Press [c] to get due date \n";
-        cout << "Press [d] to pay monthly EMI \n";
-        cout << "Press [e] to get loan type \n";
-        cout << "Press [f] to get EMI \n";
-        cout << "Press [g] to get total loan amount \n";
-        cout << "Press [h] to exit from loans section \n";
-        cout << "-------------------------------------------------------------------------------------------------" << endl;
-        cin >> choice2;
-        getchar();
-
+        p.header();
+        char choice2 =p.menuForChoice2();
+        
         switch (choice2)
         {
         case 'a':
@@ -271,7 +286,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_c.createNewLoan(obj_b);
             break;
         }
@@ -280,7 +295,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_c.generateEMI();
             break;
         }
@@ -289,7 +304,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             int acc;
             cout << "Enter the account number : ";
             cin >> acc;
@@ -301,7 +316,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_c.payMonthlyEMI();
             break;
         }
@@ -310,7 +325,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_c.getLoanType();
             break;
         }
@@ -319,7 +334,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_c.getEMI();
             break;
         }
@@ -328,7 +343,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             obj_c.getTotalLoanAmt();
             break;
         }
@@ -337,7 +352,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             cout << "Successfully exited from loans section." << endl;
             break;
         }
@@ -346,7 +361,7 @@ int main()
             system("clear");
             cout.flush();
             sleep(2);
-            header();
+            p.header();
             cout << "!!Please press the valid key!!" << endl;
             break;
         }
@@ -358,7 +373,7 @@ int main()
         system("clear");
         cout.flush();
         sleep(2);
-        header();
+        p.header();
         obj_b.searchFromCIF();
         break;
     }
@@ -367,7 +382,7 @@ int main()
         system("clear");
         cout.flush();
         sleep(2);
-        header();
+        p.header();
         obj_b.searchAboutCIF();
         break;
     }
@@ -376,7 +391,7 @@ int main()
         system("clear");
         cout.flush();
         sleep(2);
-        header();
+        p.header();
         obj_b.depositAccounts();
         break;
     }
@@ -385,7 +400,7 @@ int main()
         system("clear");
         cout.flush();
         sleep(2);
-        header();
+        p.header();
         obj_b.loanAccounts();
         break;
     }
@@ -394,7 +409,7 @@ int main()
         system("clear");
         cout.flush();
         sleep(2);
-        header();
+        p.header();
         obj_b.customerList();
         break;
     }
@@ -403,7 +418,7 @@ int main()
         system("clear");
         cout.flush();
         sleep(2);
-        header();
+        p.header();
         obj_b.newCustomer();
         break;
     }
@@ -412,7 +427,7 @@ int main()
         system("clear");
         cout.flush();
         sleep(2);
-        header();
+        p.header();
         cout << "Successfully exited from bank." << endl;
         exit(1);
         break;
@@ -422,11 +437,12 @@ int main()
         system("clear");
         cout.flush();
         sleep(2);
-        header();
+        p.header();
         cout << "!!Please press the valid key!!" << endl;
         break;
     }
     }
+
     sqlite3_close(db);
     return 0;
 }
@@ -517,7 +533,6 @@ void DepositAccount::createAccount(Bank &obj)
 
     sqlite3_step(stmt);
     sqlite3_finalize(stmt);
-
     if (result != SQLITE_OK)
     {
         cout << "Error: " << sqlite3_errmsg(db) << endl;
@@ -598,7 +613,7 @@ void DepositAccount::debitMoney()
     }
 }
 
-double DepositAccount::getAmount(int account_no) // ask the account number in main before calling the get amount function.
+double DepositAccount::getAmount(int account_no)
 {
     query = "SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
 
