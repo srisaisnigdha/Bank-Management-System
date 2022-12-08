@@ -384,13 +384,13 @@ void Printer::windowChange()
  	cout << "--------------------------------------------------------------------------------------------" << endl<<endl;
  }
  void Printer::header()
-    {
+{
         line1();
         cout << "\t\t\t\t\t\t<><><><><><><><><><><><    S M S BANK   ><><><><><><><><><><><>\t\t\t\t\t" << endl<<endl;
         line1();
-    }
-    int Printer::menu()
-    {
+}
+int Printer::menu()
+{
         int option;
         cout << "  [1]\t  DEPOSITS \n\n";
         cout << "  [2]\t  LOANS \n\n";
@@ -404,9 +404,9 @@ void Printer::windowChange()
         cin >> option;
         getchar();
         return option;
-    }
-    char Printer::menuForChoice1()
-    {
+}
+char Printer::menuForChoice1()
+{
         char choice;
         cout << "  [a]\t  NEW ACCOUNT \n\n";
         cout << "  [b]\t  DEPOSIT MONEY \n\n";
@@ -417,22 +417,22 @@ void Printer::windowChange()
         cin >> choice;
         getchar();
          return choice;
-    }
-    char Printer::menuForChoice2()
-    {
+}
+char Printer::menuForChoice2()
+{
         char choice;
         cout << "  [a]\t  NEW LOAN\n\n";
         cout << "  [b]\t  GET DUE DATE \n\n";
         cout << "  [c]\t  PAY MONTHLY EMI\n\n";
         cout << "  [d]\t  GET LOAN TYPE\n\n";
         cout << "  [e]\t  GET EMI \n\n";
-        cout << "  [f]\t   GET TOTAL LOAN AMOUNT\n\n";
+        cout << "  [f]\t  GET TOTAL LOAN AMOUNT\n\n";
         cout << "  [g]\t  EXIT\n\n";
         cin >> choice;
         getchar();
         return choice;
-    }
- void Bank::newCustomer()
+}
+void Bank::newCustomer()
 {
     CIF = generateCIF();
     cout << "\tEnter the Holder's Name :";
@@ -659,7 +659,6 @@ int Bank::checkCIF(int CIF)
     }
     return 0;
 }
-
 void DepositAccount::createAccount(Bank &obj)
 {
     char x;
@@ -698,7 +697,6 @@ void DepositAccount::createAccount(Bank &obj)
         cout << "\n\n\n\tData Inserted Successfully.\n\n\tAccount Number Generated: "<<account_number << "\n\n\n\n" << endl;
     }
 }
-
 void DepositAccount::depositMoney()
 {
     double depo_amt;
@@ -734,7 +732,6 @@ void DepositAccount::depositMoney()
         getAmount(account_number);
     }
 }
-
 void DepositAccount::debitMoney()
 {
     double debit_amt;
@@ -777,7 +774,6 @@ void DepositAccount::debitMoney()
         }
     }
 }
-
 double DepositAccount::getAmount(int account_no)
 {
     query = "SELECT * FROM DEPOSITACC WHERE ACCNO = ?;";
@@ -853,7 +849,6 @@ void DepositAccount::deleteDepositAccount(int account_no)
         cout << "\n\n\n\tDeletion Operation Stopped." << "\n\n\n\n" << endl;
     }
 }
-
 double LoanAccount::generateEMI()
 {
     double emi_amt, i;
@@ -863,7 +858,6 @@ double LoanAccount::generateEMI()
     emi_amt = (principle * i * pow(1 + i, period)) / (pow(1 + i, period) - 1);
     return emi_amt;
 }
-
 string LoanAccount::findDueDate(string d)
 {
     string due = "";
@@ -1014,7 +1008,6 @@ void LoanAccount::createNewLoan(Bank &obj)
         cout << "\n\n\n\tData Inserted Successfully.\n\n\tLoan Account Number: "<<account_number<<"\n\n\tEMI to be paid per month: "<<emi << "\n\n\n\n" << endl;
     }
 }
-
 bool LoanAccount::isPeriodOver(int account_no)
 {
     int period = getPeriod(account_no);
@@ -1052,7 +1045,6 @@ bool LoanAccount::isPeriodOver(int account_no)
         return false;
     }
 }
-
 int LoanAccount::getPeriod(int account_no)
 {
     query = "SELECT * FROM LOANACC WHERE ACCNO = ?;";
@@ -1074,7 +1066,6 @@ int LoanAccount::getPeriod(int account_no)
     }
     return 0;
 }
-
 void LoanAccount::payMonthlyEMI()
 {
     cout << "\tAccount Number:";
@@ -1204,7 +1195,6 @@ void LoanAccount::getTotalLoanAmt()
         cout << "\n\n\n\t|| ERROR: Account Number does not exist. ||" << "\n\n\n\n" << endl;
     }
 }
-
 void LoanAccount::deleteLoanAccount(int account_no)
 {
     query = "DELETE FROM LOANACC WHERE ACCNO=?";
