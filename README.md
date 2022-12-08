@@ -49,7 +49,7 @@ This is a Bank Management System made for storing and organising the bank servic
 
 ## UML Diagram
 
-Five Classes are declared. The Printer Class is inherited to Bank Class, Loan Class and Deposit Class. The Bank Class is friend to Deposit Class and Loan Class.
+Five Classes are declared. The Printer Class is inherited to Bank Class, LoanAccount Class and DepositAccount Class.
 
 ![1](https://user-images.githubusercontent.com/98080072/206574985-302e9445-ab21-446f-bdd7-c8ef9ca06a1d.png)
 
