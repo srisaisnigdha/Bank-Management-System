@@ -78,7 +78,8 @@ class Printer
 {
     public:
     void windowChange();
-    void line();
+    void line1();
+    void line2();
     void header();
     int menu();
     char menuForChoice1();
@@ -235,11 +236,11 @@ int main()
             cout << "\n\tAccount Number : ";
             cin >> acc;
             obj_a.getAmount(acc);
-            break;
+              break;
         }
         case 'f':
         {
-              p.windowChange();
+             p.windowChange();
             cout << "\n\n\n\t|| Exited from Deposits Section. ||" << "\n\n\n\n" << endl;
             break;
         }
@@ -374,16 +375,19 @@ void Printer::windowChange()
             sleep(2);
             header();
  }
- void Printer::line()
+ void Printer::line1()
  {
  	cout << "   ----------------------------------------------------------------------------------------------------------------------------------------------------" << endl<<endl;
  }
-
+ void Printer::line2()
+ {
+ 	cout << "--------------------------------------------------------------------------------------------" << endl<<endl;
+ }
  void Printer::header()
     {
-        line();
-        cout << "\t\t\t\t\t\t<><><><><><><><><><><><    S M S BANK   ><><><><><><><><><><><><>\t\t\t\t\t" << endl<<endl;
-        line();
+        line1();
+        cout << "\t\t\t\t\t\t<><><><><><><><><><><><    S M S BANK   ><><><><><><><><><><><>\t\t\t\t\t" << endl<<endl;
+        line1();
     }
     int Printer::menu()
     {
@@ -480,12 +484,12 @@ void Bank::searchAboutCIF()
     }
     else
     {
-        line();
+        line2();
         cout << left << setw(25) << "NAME"
              << setw(25) << "FATHER'S NAME"
              << setw(25) << "MOBILE NO"
              << setw(25) << "ADDRESS" << endl;
-        line();
+        line2();
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             cout << left << setw(25) << sqlite3_column_text(stmt, 1)
@@ -495,7 +499,7 @@ void Bank::searchAboutCIF()
 
             return;
         }
-        line();
+        line2();
         cout << "\n\n\n\t|| ERROR: The given CIF Number does not exist. || " << "\n\n\n\n" << endl;
     }
 }
@@ -516,16 +520,16 @@ void Bank::searchFromCIF()
     }
     else
     {
-        // cout<<"The deposit accounts on this CIF number are : "<<endl;
-        line();
+       cout<<"\n\tDEPOSIT ACCOUNTS : "<<endl;
+        line2();
         cout << left << setw(25) << "Account number" << setw(25) << "Account type " << endl;
-        line();
+        line2();
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             cout << left << setw(25) << sqlite3_column_int(stmt, 0)
                  << setw(25) << sqlite3_column_text(stmt, 1) << endl;
         }
-        line();
+        line2();
     }
 
     query = "SELECT * FROM LOANACC WHERE CIF = ?;";
@@ -539,16 +543,16 @@ void Bank::searchFromCIF()
     }
     else
     {
-        // cout<<"The loan accounts on this CIF number are : "<<endl;
-        line();
+       cout<<"\tLOAN ACCOUNTS :"<<endl;
+        line2();
         cout << left << setw(25) << "Account number" << setw(25) << "Account type " << endl;
-        line();
+        line2();
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             cout << left << setw(25) << sqlite3_column_int(stmt, 0)
                  << setw(25) << sqlite3_column_text(stmt, 1) << endl;
         }
-        line();
+        line2();
     }
 }
 void Bank::depositAccounts()
@@ -563,12 +567,12 @@ void Bank::depositAccounts()
     else
     {
         cout << "\tDEPOSITS LIST   : " << endl;
-        line();
+        line2();
         cout << left << setw(25) << "Account number"
              << setw(25) << "Account type"
              << setw(25) << "CIF"
              << setw(25) << "BALANCE " << endl;
-        line();
+        line2();
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             cout << left << setw(25) << sqlite3_column_int(stmt, 0)
@@ -576,7 +580,7 @@ void Bank::depositAccounts()
                  << setw(25) << sqlite3_column_int(stmt, 2)
                  << setw(25) << sqlite3_column_double(stmt, 3) << endl;
         }
-        line();
+        line2();
     }
 }
 void Bank::loanAccounts()
@@ -591,12 +595,12 @@ void Bank::loanAccounts()
     else
     {
         cout << "\tLOANS LIST  : " << endl;
-        line();
+        line2();
         cout << left << setw(25) << "Account number"
              << setw(25) << "Account type"
              << setw(25) << "CIF"
              << setw(25) << "EMI" << endl;
-        line();
+        line2();
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             cout << left << setw(25) << sqlite3_column_int(stmt, 0)
@@ -604,7 +608,7 @@ void Bank::loanAccounts()
                  << setw(25) << sqlite3_column_int(stmt, 2)
                  << setw(25) << sqlite3_column_double(stmt, 4) << endl;
         }
-        line();
+        line2();
     }
 }
 void Bank::customerList()
@@ -619,12 +623,12 @@ void Bank::customerList()
     else
     {
         cout << "\tCUSTOMER LIST  : " << endl;
-        line();
+        line2();
         cout << left << setw(25) << "CIF"
              << setw(25) << "NAME"
              << setw(25) << "FATHERNAME"
              << setw(25) << "MOBILENO" << endl;
-        line();
+        line2();
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             cout << left << setw(25) << sqlite3_column_int(stmt, 0)
@@ -632,7 +636,7 @@ void Bank::customerList()
                  << setw(25) << sqlite3_column_text(stmt, 2)
                  << setw(25) << sqlite3_column_int64(stmt, 3) << endl;
         }
-        line();
+        line2();
     }
 }
 int Bank::checkCIF(int CIF)
