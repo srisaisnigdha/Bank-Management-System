@@ -1011,7 +1011,6 @@ void LoanAccount::createNewLoan(Bank &obj)
 bool LoanAccount::isPeriodOver(int account_no)
 {
     int period = getPeriod(account_no);
-    cout << period;
     int d1, m1, y1, d2, m2, y2;
     string date1, date2;
     date1 = getDateIssued(account_no);
@@ -1035,7 +1034,7 @@ bool LoanAccount::isPeriodOver(int account_no)
             m2 = m + 1;
         }
     }
-
+    cout<<"m1,m2:"<<m2-m1<<" y2-y1: "<<y2-y1<<endl;
     if (m1 < m2 && y2 - y1 >= period)
     {
         return true;
