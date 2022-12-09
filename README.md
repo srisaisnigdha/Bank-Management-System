@@ -52,8 +52,7 @@ This is a Bank Management System made for storing and organising the bank servic
 Five Classes are declared. The Printer Class is inherited to Bank Class, LoanAccount Class and DepositAccount Class.
 
 ![1](https://user-images.githubusercontent.com/98080072/206574985-302e9445-ab21-446f-bdd7-c8ef9ca06a1d.png)
-
-![2](https://user-images.githubusercontent.com/98080072/206573919-8085808f-c376-4ecf-bedc-a87f5d89c203.png)
+![uml_pro](https://user-images.githubusercontent.com/98080072/206639122-6feb7921-a1db-4870-be70-bcca92be0448.png)
 
 
 ## How To Run
