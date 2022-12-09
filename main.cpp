@@ -1034,8 +1034,7 @@ bool LoanAccount::isPeriodOver(int account_no)
             m2 = m + 1;
         }
     }
-    cout<<"m1,m2:"<<m2-m1<<" y2-y1: "<<y2-y1<<endl;
-    if (m1 < m2 && y2 - y1 >= period)
+    if ((m1 < m2|| m1==12&&m2==1) && y2 - y1 >= period)
     {
         return true;
     }
